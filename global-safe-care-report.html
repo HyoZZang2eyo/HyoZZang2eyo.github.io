@@ -15,6 +15,17 @@
         .kakao-yellow { background-color: #FEE500; color: #191919; }
         .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .flow-line { border-left: 2px dashed #CBD5E1; position: absolute; left: 50%; height: 20px; transform: translateX(-50%); }
+        /* UI 이미지 스타일 */
+        .mobile-ui {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-ui:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body>
@@ -163,9 +174,12 @@
                         <section>
                             <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                                 <span className="w-8 h-8 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mr-3"><Icon name="smartphone" size={18}/></span>
-                                주요 기능 구현 (Key Features)
+                                주요 기능 구현 (Key Features & UI/UX)
                             </h2>
-                            <div className="grid md:grid-cols-3 gap-6">
+                            <p className="text-gray-500 text-sm mb-8">주요 화면의 디자인 및 사용자 경험(UX) 구현 스크린샷입니다.</p>
+                            
+                            {/* Feature Cards Grid (3 columns) */}
+                            <div className="grid md:grid-cols-3 gap-6 mb-12">
                                 {/* Feature 1 */}
                                 <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
                                     <div className="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-4">
@@ -173,11 +187,8 @@
                                     </div>
                                     <h3 className="font-bold text-gray-900 mb-2">Embedded 가입</h3>
                                     <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                                        별도의 보험사 페이지 이동 없이, 배송 정보 입력 단계에서 체크박스 하나로 즉시 가입되는 임베디드 UX를 구현했습니다.
+                                        배송 정보 입력 시 체크박스 하나로 즉시 가입되는 임베디드 UX를 구현했습니다.
                                     </p>
-                                    <div className="bg-gray-100 p-2 rounded text-[10px] text-gray-600 font-mono">
-                                        onClick={() => setIsInsured(!v)}
-                                    </div>
                                 </div>
 
                                 {/* Feature 2 */}
@@ -187,11 +198,8 @@
                                     </div>
                                     <h3 className="font-bold text-gray-900 mb-2">AI 안심 심사</h3>
                                     <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                                        파손 사진 업로드 시, AI 분석 과정을 Progress Bar로 시각화하여 사용자에게 신뢰감과 빠른 처리 경험을 제공합니다.
+                                        파손 사진 업로드 시 AI 분석 과정을 시각화하여 신뢰감과 빠른 처리 경험을 제공합니다.
                                     </p>
-                                    <div className="bg-gray-100 p-2 rounded text-[10px] text-gray-600 font-mono">
-                                        setTimeout(analyze, 2000)
-                                    </div>
                                 </div>
 
                                 {/* Feature 3 */}
@@ -201,12 +209,30 @@
                                     </div>
                                     <h3 className="font-bold text-gray-900 mb-2">무사고 Payback</h3>
                                     <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                                        사고 없이 배송이 완료되면 보험료의 10%를 포인트로 자동 환급하여 셀러의 재가입을 유도합니다.
+                                        사고 없이 배송 완료 시 보험료 10%를 포인트로 자동 환급합니다.
                                     </p>
-                                    <div className="bg-gray-100 p-2 rounded text-[10px] text-gray-600 font-mono">
-                                        user.points += premium * 0.1
-                                    </div>
                                 </div>
+                            </div>
+                            
+                            {/* Mobile Screenshots Grid (4 images) */}
+                            <h3 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-gray-300 pl-3">주요 화면 스크린샷</h3>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {/* Image 1: 카카오 비즈니스 홈 */}
+                                <img src="./스크린샷 2025-11-24 오전 2.13.39.png" 
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x400?text=App+Home'" 
+                                     alt="앱 메인 화면" class="mobile-ui border border-gray-200">
+                                {/* Image 2: 해외 배송 접수 */}
+                                <img src="./스크린샷 2025-11-24 오전 2.13.50.png" 
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x400?text=App+Register'" 
+                                     alt="해외 배송 접수 화면" class="mobile-ui border border-gray-200">
+                                {/* Image 3: 안심 보상 센터 */}
+                                <img src="./스크린샷 2025-11-24 오전 2.14.21.png" 
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x400?text=App+Compensation'" 
+                                     alt="안심 보상 센터" class="mobile-ui border border-gray-200">
+                                {/* Image 4: 환급 팝업 */}
+                                <img src="./스크린샷 2025-11-24 오전 2.15.06.png" 
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x400?text=App+Payback'" 
+                                     alt="환급 완료 팝업" class="mobile-ui border border-gray-200">
                             </div>
                         </section>
 
@@ -221,7 +247,7 @@
                                 <span className="px-4 py-2 bg-cyan-50 text-cyan-700 rounded-full text-sm font-bold border border-cyan-100">Tailwind CSS</span>
                                 <span className="px-4 py-2 bg-yellow-50 text-yellow-700 rounded-full text-sm font-bold border border-yellow-100">JavaScript (ES6+)</span>
                                 <span className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-bold border border-gray-200">Python (Logic)</span>
-                                <span className="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-bold border border-pink-100">Lucide Icons</span>
+                                <span class="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-bold border border-pink-100">UX/UI Design</span>
                             </div>
                         </section>
 
