@@ -109,7 +109,7 @@
 
         function FeatureCard({ feature }) {
             return (
-                // 이미지와 텍스트가 가로로 배치되고, 내용이 겹치지 않도록 세로 정렬 기준을 위쪽(start)으로 설정
+                // items-start를 사용하여 상단 정렬을 유지하고, 텍스트 영역에 여유 공간(pl-10)을 줌
                 <div className="feature-card-wrapper flex flex-col md:flex-row items-start gap-8 py-8 border-b border-gray-100 last:border-b-0">
                     <div className="w-full md:w-1/3 order-1 mobile-ui-container">
                         <img 
@@ -119,7 +119,7 @@
                             className="mobile-ui"
                         />
                     </div>
-                    <div className="w-full md:w-2/3 order-2 space-y-4 pt-3 md:pt-0"> {/* 정렬 상단 보정을 위한 pt-3 추가 */}
+                    <div className="w-full md:w-2/3 order-2 space-y-4 pt-3 md:pt-0 md:pl-10 min-h-52"> {/* min-h-52 (최소 높이) 추가 */}
                         <div className="text-xl font-bold text-gray-900 flex items-center">
                              <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3">
                                  <Icon name={feature.iconName} size={18}/>
@@ -145,23 +145,23 @@
                             <Icon name="box" size={200} />
                         </div>
                         <span className="bg-black text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block">Project Portfolio</span>
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight">Global Safe Care</h1>
-                        <p className="text-xl font-medium text-gray-800 opacity-80">K-셀러를 위한 글로벌 안심 반품/배송 보험 플랫폼</p>
-                        <a href="index.html" className="absolute top-6 left-6 text-gray-800 hover:text-gray-600 transition flex items-center text-sm font-medium">
-                            <Icon name="arrowRight" size={16} className="transform rotate-180 mr-1"/> 메인 포트폴리오로 돌아가기
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight">Global Safe Care</h1>
+                        <p class="text-xl font-medium text-gray-800 opacity-80">K-셀러를 위한 글로벌 안심 반품/배송 보험 플랫폼</p>
+                        <a href="index.html" class="absolute top-6 left-6 text-gray-800 hover:text-gray-600 transition flex items-center text-sm font-medium">
+                            <Icon name="arrowRight" size={16} class="transform rotate-180 mr-1"/> 메인 포트폴리오로 돌아가기
                         </a>
                     </header>
 
-                    <div className="p-8 md:p-12 space-y-16">
+                    <div class="p-8 md:p-12 space-y-16">
 
                         {/* 2. Overview & Problem Solving (기존 섹션 유지) */}
                         <section>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                                <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3"><Icon name="search" size={18}/></span>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3"><Icon name="search" size={18}/></span>
                                 기획 배경 및 문제 해결 (Problem & Solution)
                             </h2>
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div className="bg-red-50 p-6 rounded-2xl border border-red-100">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
                                     <h3 class="font-bold text-red-600 mb-3 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i> 문제점 (Pain Point)</h3>
                                     <ul class="space-y-3 text-gray-700 text-sm">
                                         <li class="flex items-start">
