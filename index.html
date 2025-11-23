@@ -44,7 +44,7 @@
             color: white;
         }
 
-        /* 모달 애니메이션 */
+        /* 모달 애니메이션 (프로젝트 3처럼 아직 모달을 쓰는 경우를 위한 스타일만 남김) */
         .modal {
             transition: opacity 0.2s ease, visibility 0.2s ease;
             opacity: 0;
@@ -82,7 +82,6 @@
                 KimHyojin<span class="text-blue-900">.Archive</span>
             </a>
             <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                <!-- Profile 링크 삭제됨 -->
                 <a href="#projects" class="hover:text-blue-900 transition">Projects</a>
                 <a href="#contact" class="hover:text-blue-900 transition">Contact</a>
             </div>
@@ -114,8 +113,6 @@
 
 <main class="max-w-6xl mx-auto px-4 pb-20">
 
-    <!-- About 섹션 삭제됨 -->
-
     <!-- Projects 섹션 -->
     <section id="projects" class="py-20">
         <div class="flex justify-between items-end mb-12">
@@ -127,8 +124,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- 프로젝트 1: Global Safe Care -->
-            <article onclick="openModal('project1')" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+            <!-- 프로젝트 1: Global Safe Care (상세 페이지로 바로 연결) -->
+            <a href="global-safe-care-report.html" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
                     <!-- 썸네일 이미지 -->
@@ -138,7 +135,7 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Global Safe Care</h3>
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Global Safe Care <i class="fas fa-external-link-alt text-xs ml-2 text-blue-600"></i></h3>
                         <span class="px-2 py-1 text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">InsurTech</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
@@ -150,19 +147,20 @@
                         <span>#Risk_Management</span>
                     </div>
                 </div>
-            </article>
+            </a>
 
-            <!-- 프로젝트 2: 스마트 농가 -->
-            <article onclick="openModal('project2')" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+            <!-- 프로젝트 2: 스마트 농가 (상세 페이지로 바로 연결) -->
+            <a href="smart-farm-report.html" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
                     <div class="w-full h-full flex items-center justify-center text-slate-300">
+                        <!-- 썸네일 이미지가 있다면 여기에 <img src="...">을 넣으세요 -->
                         <i class="fas fa-chart-pie text-5xl"></i>
                     </div>
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Smart Farm Data</h3>
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Smart Farm Data <i class="fas fa-external-link-alt text-xs ml-2 text-blue-600"></i></h3>
                         <span class="px-2 py-1 text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">Data Analysis</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
@@ -174,9 +172,9 @@
                         <span>#EDA</span>
                     </div>
                 </div>
-            </article>
+            </a>
 
-            <!-- 프로젝트 3: 시계열 분석 -->
+            <!-- 프로젝트 3: 시계열 분석 (모달 유지) -->
             <article onclick="openModal('project3')" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -223,7 +221,7 @@
     </div>
 </footer>
 
-<!-- 모달 팝업 -->
+<!-- 모달 팝업 (프로젝트 3처럼 아직 상세 페이지가 없는 경우를 위한 모달) -->
 <div id="projectModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
     <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
 
@@ -242,63 +240,8 @@
 </div>
 
 <script>
-    // 프로젝트 데이터
+    // 프로젝트 데이터 (Project 1, 2는 이제 외부 파일로 연결되므로 데이터 삭제됨)
     const projects = {
-        'project1': {
-            title: 'Global Safe Care',
-            content: `
-                    <div class="bg-slate-50 p-10 border-b border-slate-100 text-center">
-                        <div class="inline-block px-3 py-1 text-xs font-bold text-blue-800 bg-blue-50 border border-blue-100 mb-4">MAIN PROJECT</div>
-                        <h2 class="text-3xl font-bold serif-font mb-3 text-slate-900">Global Safe Care</h2>
-                        <p class="text-slate-500">K-셀러를 위한 글로벌 안심 반품/배송 보험 플랫폼</p>
-                    </div>
-                    <div class="p-10 space-y-10">
-                        <div>
-                            <h3 class="text-lg font-bold border-l-4 border-slate-900 pl-3 mb-4 text-slate-900">Project Overview</h3>
-                            <img src="./스크린샷 2025-11-24 오전 2.16.03.png" onerror="this.src='https://via.placeholder.com/800x400?text=Overview+Image'" class="w-full border border-slate-200 mb-4 shadow-sm">
-                            <p class="text-slate-700 leading-relaxed">
-                                해외 역직구 시 발생하는 반품 배송비 문제와 복잡한 보험 절차를 해결하기 위해 기획된 프로젝트입니다.
-                                기존의 복잡한 심사 과정을 AI 이미지 분석을 통해 자동화하고, '임베디드 보험' 형태로 쇼핑몰 결제 단계에서 쉽게 가입할 수 있도록 구현했습니다.
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="text-lg font-bold border-l-4 border-slate-900 pl-3 mb-4 text-slate-900">Logic Flow</h3>
-                                <img src="./스크린샷 2025-11-24 오전 2.17.18.png" onerror="this.src='https://via.placeholder.com/600x400?text=Logic+Image'" class="w-full border border-slate-200 shadow-sm">
-                                <p class="text-slate-500 text-xs mt-2">보험료 산정 및 환급 로직 흐름도</p>
-                            </div>
-                            <div class="bg-slate-50 p-6 border border-slate-100">
-                                <h3 class="text-sm font-bold text-slate-900 mb-4 uppercase">Tech Stack</h3>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white border border-slate-200 text-sm text-slate-700">Python (Logic)</span>
-                                    <span class="px-3 py-1 bg-white border border-slate-200 text-sm text-slate-700">React</span>
-                                    <span class="px-3 py-1 bg-white border border-slate-200 text-sm text-slate-700">InsurTech API</span>
-                                    <span class="px-3 py-1 bg-white border border-slate-200 text-sm text-slate-700">Data Analysis</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-        },
-        'project2': {
-            title: 'Smart Farm Data Analysis',
-            content: `
-                    <div class="bg-slate-50 p-10 border-b border-slate-100 text-center">
-                         <div class="inline-block px-3 py-1 text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 mb-4">DATA ANALYSIS</div>
-                        <h2 class="text-3xl font-bold serif-font mb-3 text-slate-900">Smart Farm Data</h2>
-                        <p class="text-slate-500">스마트 농가 환경 데이터 최적화</p>
-                    </div>
-                    <div class="p-10">
-                        <div class="flex items-center justify-center h-64 bg-slate-100 mb-6 text-slate-400 border border-slate-200">
-                            <i class="fas fa-chart-bar text-4xl"></i>
-                        </div>
-                        <p class="text-slate-700 leading-relaxed mb-4">
-                            농가 센서 데이터(온도, 습도, CO2)와 작물 생산량 간의 상관관계를 분석했습니다.
-                            R을 사용하여 상관분석을 수행했고, Tableau를 이용해 농장주가 직관적으로 이해할 수 있는 대시보드를 제작했습니다.
-                        </p>
-                    </div>
-                `
-        },
         'project3': {
             title: 'Time Series Forecast',
             content: `
@@ -315,6 +258,7 @@
                             환율 및 원자재 가격 데이터를 수집하여 ARIMA와 LSTM 모델 성능을 비교 분석했습니다.
                             변동성이 큰 구간에서는 딥러닝 모델(LSTM)이 더 우수한 예측 성능을 보임을 입증했습니다.
                         </p>
+                         <p class="text-xs text-red-500 mt-6">⚠️ 이 내용은 현재 모달로 임시 표시되며, 정식 보고서를 만들면 해당 페이지로 연결될 예정입니다.</p>
                     </div>
                 `
         }
