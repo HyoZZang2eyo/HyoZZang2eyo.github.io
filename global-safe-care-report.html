@@ -6,7 +6,8 @@
     <title>Project Portfolio: Global Safe Care</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
@@ -25,7 +26,6 @@
             transition: transform 0.3s ease-in-out;
             margin: 0 auto; /* 중앙 정렬 */
         }
-        /* mobile-ui-container 스타일 제거하여 배경 도형 없앰 */
         
         .main-ui-img {
             max-width: 400px;
@@ -59,7 +59,11 @@
                 cpu: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z M12 12v.01" />, 
                 arrowRight: <path d="M5 12h14 M12 5l7 7-7 7" />,
                 search: <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.35-4.35" />,
-                camera: <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+                camera: <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />,
+                // FontAwesome 대체용 SVG 경로 (일반적인 아이콘만 포함)
+                exclamationTriangle: <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01" />,
+                checkCircleSolid: <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" />,
+                home: <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10" />
             };
             return (
                 <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -101,9 +105,9 @@
 
         function FeatureCard({ feature }) {
             return (
-                // items-start를 제거하고 items-center로 변경 (세로 중앙 정렬)
+                // items-center를 사용해 세로 중앙 정렬. md:w-1/3이 이미지, md:w-2/3이 텍스트
                 <div className="feature-card-wrapper flex flex-col md:flex-row items-center gap-8 py-8 border-b border-gray-100 last:border-b-0">
-                    <div className="w-full md:w-1/3 order-1"> {/* mobile-ui-container 클래스 제거 */}
+                    <div className="w-full md:w-1/3 order-1"> {/* 모바일 UI 이미지 컨테이너 */}
                         <img 
                             src={feature.imageSrc} 
                             onerror="this.onerror=null; this.src='https://via.placeholder.com/250x400?text=Mockup'" 
@@ -111,7 +115,8 @@
                             className="mobile-ui"
                         />
                     </div>
-                    <div className="w-full md:w-2/3 order-2 space-y-4 pt-3 md:pt-0 md:pl-10 min-h-52"> {/* min-h-52 (최소 높이) 유지 */}
+                    {/* 텍스트 컨테이너에 min-h를 유지하여 이미지에 밀리지 않도록 함 */}
+                    <div className="w-full md:w-2/3 order-2 space-y-4 pt-3 md:pt-0 md:pl-10 min-h-52"> 
                         <div className="text-xl font-bold text-gray-900 flex items-center">
                              <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3">
                                  <Icon name={feature.iconName} size={18}/>
@@ -154,7 +159,7 @@
                             </h2>
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
-                                    <h3 class="font-bold text-red-600 mb-3 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i> 문제점 (Pain Point)</h3>
+                                    <h3 class="font-bold text-red-600 mb-3 flex items-center"><Icon name="exclamationTriangle" size={16} className="mr-2"/> 문제점 (Pain Point)</h3>
                                     <ul class="space-y-3 text-gray-700 text-sm">
                                         <li class="flex items-start">
                                             <span class="mr-2 text-red-400">•</span>
@@ -167,7 +172,7 @@
                                     </ul>
                                 </div>
                                 <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-                                    <h3 class="font-bold text-blue-600 mb-3 flex items-center"><i class="fas fa-check-circle mr-2"></i> 해결책 (Solution)</h3>
+                                    <h3 class="font-bold text-blue-600 mb-3 flex items-center"><Icon name="checkCircleSolid" size={16} className="mr-2"/> 해결책 (Solution)</h3>
                                     <ul class="space-y-3 text-gray-700 text-sm">
                                         <li class="flex items-start">
                                             <span class="mr-2 text-blue-500">✓</span>
@@ -185,7 +190,7 @@
                         {/* 3. 프로젝트 진입점 (서비스 홈) - NEW SECTION for the first image */}
                         <section className="bg-gray-100 p-8 rounded-2xl border border-gray-200 text-center">
                             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center justify-center">
-                                <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mr-3"><i class="fas fa-home"></i></span>
+                                <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mr-3"><Icon name="home" size={18}/></span>
                                 서비스 진입점 (Service Home UI)
                             </h2>
                             <p class="text-gray-600 text-sm max-w-lg mx-auto mb-6">
