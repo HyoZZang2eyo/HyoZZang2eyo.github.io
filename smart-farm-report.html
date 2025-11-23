@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-NAPS | 경남 마늘 수급 안정화 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #f8f7f4;
+            color: #1f2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            height: 300px;
+            max-height: 300px;
+        }
+        .chart-container-lg {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 900px;
+            height: 400px;
+            max-height: 400px;
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Modal Style */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        .close-button {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #bc4749;
+        }
+        .placeholder-box {
+            background-color: #f0fdf4;
+            border: 2px dashed #a7c957;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 250px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #6a994e;
+            margin-bottom: 10px; /* 여백 15px -> 10px */
+        }
+    </style>
+</head>
+<body style="background-color: white;">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-8"> <!-- mb-12 -> mb-8 -->
+            <h1 class="text-5xl font-extrabold mb-3" style="color: #6a994e;">
+                🧄 G-NAPS
+            </h1>
+            <h2 class="text-2xl font-bold text-gray-700">경남 마늘 수급 안정화 인포그래픽</h2>
+            <p class="text-lg text-gray-600 mt-2">AI 예측이 농가 소득의 변동성을 관리하고 선제적 대응을 주도합니다.</p>
+        </header>
+
+        <section class="mb-8"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-6">문제: 예측 불가능한 시장 변동성</h2>
+            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 text-center">
+                <p class="text-lg text-gray-700">
+                    경남 마늘은 기후와 작황에 따라 생산량이 급변하여 가격 폭등과 폭락을 반복합니다.
+                    문제가 발생한 뒤의 <strong style="color: #bc4749;">'사후 약방문'</strong>식 대책은 농가 소득 안정화에 한계가 있었습니다.
+                    G-NAPS는 이 문제를 <strong style="color: #6a994e;">'선제적 AI 진단'</strong>으로 해결합니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-8"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-6">G-NAPS 실시간 AI 진단</h2>
+            <p class="text-lg text-gray-600 text-center mb-6">현재 생산량(580톤)을 기준으로 AI가 수급 상태를 '과잉 우려'로 진단했습니다.</p> <!-- mb-8 -> mb-6 -->
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4"> <!-- gap-6 -> gap-4 -->
+                <div class="kpi-card md:col-span-1" style="border: 2px solid #bc4749;">
+                    <h3 class="text-xl font-bold text-center mb-4">AI 수급 진단</h3>
+                    <div class="text-center my-auto">
+                        <p class="text-6xl font-extrabold" style="color: #bc4749;">⚠️</p>
+                        <p class="text-2xl font-extrabold mt-3" style="color: #bc4749;">경계 (과잉 우려)</p>
+                        <p class="text-lg font-bold text-gray-700 mt-3">+9.4%</p>
+                        <p class="text-sm text-gray-500">(평년 530톤 대비 580톤)</p>
+                    </div>
+                </div>
+
+                <div class="kpi-card md:col-span-1">
+                    <h3 class="text-lg font-bold text-center mb-4">현재 생산량 vs 평년 (톤)</h3>
+                    <div class="chart-container">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="kpi-card md:col-span-1">
+                    <h3 class="text-xl font-bold text-center mb-4">AI 예측 신뢰도</h3>
+                    <div class="chart-container">
+                        <canvas id="confidenceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8 bg-white rounded-lg shadow-md p-6"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-2">AI 가격 예측: 3개월 후 하락 전망</h2>
+            <p class="text-lg text-gray-600 text-center mb-4">'과잉 우려' 상태가 지속될 경우, 8월부터 마늘 도매가격이 평년 대비 하락할 것으로 예측됩니다.</p> <!-- mb-6 -> mb-4 -->
+            <div class="chart-container-lg">
+                <canvas id="priceChart"></canvas>
+            </div>
+        </section>
+
+        <section class="mb-8"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-6">AI 자동 대응 매뉴얼 (Action Plan)</h2>
+            <p class="text-lg text-gray-600 text-center mb-6">'과잉 우려' 진단에 따라, 시스템은 즉각적인 시장 안정화 조치를 제안합니다.</p> <!-- mb-8 -> mb-6 -->
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- gap-6 -> gap-4 -->
+                <div class="kpi-card border-l-8" style="border-color: #bc4749;">
+                    <h3 class="text-2xl font-bold mb-3 flex items-center">
+                        <span class="text-3xl mr-3">🚛</span> 1단계: 시장 격리 (긴급 수매)
+                    </h3>
+                    <p class="text-lg text-gray-700">
+                        가격 폭락 방지를 위해 과잉 물량의 일부(생산량의 10%인 <strong class="font-bold">58톤</strong>)를 즉시 수매하여 시장 공급을 조절합니다.
+                    </p>
+                </div>
+                <div class="kpi-card border-l-8" style="border-color: #bc4749;">
+                    <h3 class="text-2xl font-bold mb-3 flex items-center">
+                        <span class="text-3xl mr-3">🍔</span> 2단계: 기업 상생 매칭
+                    </h3>
+                    <p class="text-lg text-gray-700">
+                        대량 소비 촉진을 위해 <strong class="font-bold">맥도날드, 롯데리아</strong> 등 대형 프랜차이즈 및 마트에 프로모션 제휴를 발송합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Gemini API 기반 AI 기능 추가 -->
+            <div class="mt-6 pt-4 border-t border-gray-300 grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- mt-8 -> mt-6 -->
+                <button id="guideButton" class="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md col-span-1 md:col-span-2">
+                    👨‍🌾 맞춤형 영농 가이드 초안 요청 (LLM 지원)
+                </button>
+            </div>
+        </section>
+
+        <!-- PDF 캡처 내용을 구조적으로 대체하는 섹션 (고객님 요청 반영) -->
+        <section class="mb-8"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-6">실제 운영 시나리오 및 실행 결과</h2>
+            <p class="text-lg text-gray-600 text-center mb-4"> <!-- mb-8 -> mb-4 -->
+                G-NAPS 대시보드(<code class="bg-gray-200 p-1 rounded">app.py</code>)의 핵심 가치는 선제적 진단과 자동화된 대응에 있습니다. 
+                다음은 실제 대시보드 실행 결과를 시나리오별로 분리하여 요약한 내용입니다.
+            </p>
+
+            <div class="space-y-4"> <!-- space-y-8 -> space-y-4 -->
+                <!-- 시나리오 1: 초과 공급 심각 (구현1.pdf 기반) -->
+                <div class="kpi-card border-t-4 border-l-4 p-5" style="border-color: #bc4749;">
+                    <div class="placeholder-box">
+                        <img 
+                            src="g-naps1.jpeg" 
+                            alt="G-NAPS 대시보드 초과공급 시나리오"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x250/a7c957/ffffff?text=Screenshot+1+:+Red+Light+(초과공급)'; display: block;" 
+                            style="width: 100%; height: 100%; object-fit: contain; display: block;"
+                        />
+                    </div>
+                    <h3 class="text-xl font-extrabold mb-3" style="color: #bc4749;">1. 초과 공급 심각 (Red Light)</h3>
+                    <p class="text-sm font-bold text-gray-700">진단 일자: 2025-08-01</p>
+                    <hr class="my-3">
+                    <ul class="text-base space-y-1 text-gray-700"> <!-- space-y-2 -> space-y-1 -->
+                        <li><strong class="font-extrabold">증감률: +20.4%</strong> (심각 기준 초과)</li>
+                        <li><strong class="font-extrabold">예측:</strong> 가격 폭락 전망 및 하락 추이 확정.</li>
+                        <li><strong class="font-extrabold">조치:</strong> 긴급 수매 명령 (64톤) 및 기업 제휴 제안서 자동 발송.</li>
+                    </ul>
+                    <p class="mt-3 text-sm font-bold bg-red-50 p-2 rounded" style="color: #bc4749;"> <!-- mt-4 -> mt-3 -->
+                        ➡️ AI 예측에 따른 즉각적인 시장 안정화 조치 실행 완료.
+                    </p>
+                </div>
+
+                <!-- 시나리오 2: 공급 부족 시뮬레이션 (구현2.pdf 기반) -->
+                <div class="kpi-card border-t-4 border-l-4 p-5" style="border-color: #f59e0b;">
+                    <div class="placeholder-box">
+                        <img 
+                            src="g-naps2.jpeg" 
+                            alt="G-NAPS What-If 분석 시뮬레이션"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x250/a7c957/ffffff?text=Screenshot+2+:+What-If+Analysis+(공급부족)'; display: block;" 
+                            style="width: 100%; height: 100%; object-fit: contain; display: block;"
+                        />
+                    </div>
+                    <h3 class="text-xl font-extrabold mb-3" style="color: #f59e0b;">2. 공급 부족 경고 (What-If 분석)</h3>
+                    <p class="text-sm font-bold text-gray-700">분석 시점: 2025-07-28</p>
+                    <hr class="my-3">
+                    <ul class="text-base space-y-1 text-gray-700"> <!-- space-y-2 -> space-y-1 -->
+                        <li><strong class="font-extrabold">시뮬레이션:</strong> 예상 생산량 450톤 가정.</li>
+                        <li><strong class="font-extrabold">증감률: -15.1%</strong> (심각 기준 도달)</li>
+                        <li><strong class="font-extrabold">예측:</strong> 가격 급등(폭등) 전망.</li>
+                        <li><strong class="font-extrabold">조치:</strong> 비축 물량 긴급 방출 명령 발동 필요.</li>
+                    </ul>
+                    <p class="mt-3 text-sm font-bold bg-yellow-50 p-2 rounded" style="color: #f59e0b;"> <!-- mt-4 -> mt-3 -->
+                        ➡️ 사용자 조작에 따른 선제적 위험 시나리오 대비 완료.
+                    </p>
+                </div>
+
+                <!-- 시나리오 3: 시스템 조치 로그 (구현3.pdf 기반) -->
+                <div class="kpi-card border-t-4 border-l-4 p-5" style="border-color: #6a994e;">
+                    <div class="placeholder-box">
+                        <img 
+                            src="g-naps3.jpeg" 
+                            alt="G-NAPS 시스템 조치 로그"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x250/a7c957/ffffff?text=Screenshot+3+:+Audit+Log+(운영+기록)'; display: block;" 
+                            style="width: 100%; height: 100%; object-fit: contain; display: block;"
+                        />
+                    </div>
+                    <h3 class="text-xl font-extrabold mb-3" style="color: #6a994e;">3. 시스템 운영 기록 (Audit Log)</h3>
+                    <p class="text-sm font-bold text-gray-700">시간 범위: 2025-07-24 ~ 2025-07-28</p>
+                    <hr class="my-3">
+                    <ul class="text-base space-y-1 text-gray-700"> <!-- space-y-2 -> space-y-1 -->
+                        <li><strong class="font-extrabold">긴급 조치:</strong> 3건 (수매, 제휴, 방출)</li>
+                        <li><strong class="font-extrabold">정보 보고:</strong> 2건 (재고 관리팀/농정국)</li>
+                        <li><strong class="font-extrabold">시스템 점검:</strong> 1건 (DB 무결성 체크)</li>
+                        <li><strong class="font-extrabold">상태:</strong> 모든 조치 성공적으로 실행 완료.</li>
+                    </ul>
+                    <p class="mt-3 text-sm font-bold bg-green-50 p-2 rounded" style="color: #6a994e;"> <!-- mt-4 -> mt-3 -->
+                        ➡️ 투명한 기록을 통한 운영 안정성 확보.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mb-8"> <!-- mb-12 -> mb-8 -->
+            <h2 class="text-3xl font-bold text-center mb-6">G-NAPS는 어떻게 작동하나요?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- gap-8 -> gap-4 -->
+                
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold text-center mb-6">4단계 데이터 파이프라인</h3>
+                    <div class="flex flex-col space-y-4">
+                        <div class="p-4 rounded-lg text-center font-bold text-lg" style="background-color: #e5e5e5; color: #1f2937;">
+                            1. 데이터 수집 (공공 DB 연동)
+                        </div>
+                        <div class="text-center text-3xl font-bold" style="color: #6a994e;">▼</div>
+                        <div class="p-4 rounded-lg text-center font-bold text-lg" style="background-color: #a7c957; color: #1f2937;">
+                            2. 데이터 처리 (생산량/증감률 계산)
+                        </div>
+                        <div class="text-center text-3xl font-bold" style="color: #6a994e;">▼</div>
+                        <div class="p-4 rounded-lg text-center font-bold text-lg" style="background-color: #bc4749; color: white;">
+                            3. AI 진단 (수급 상태 5단계 분류)
+                        </div>
+                        <div class="text-center text-3xl font-bold" style="color: #6a994e;">▼</div>
+                        <div class="p-4 rounded-lg text-center font-bold text-lg" style="background-color: #6a994e; color: white;">
+                            4. 대응 및 예측 (Action Plan 실행)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold text-center mb-3">5단계 AI 진단 로직</h3> <!-- mb-6 -> mb-3 -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-left text-sm md:text-base">
+                            <thead class="font-bold border-b-2" style="border-color: #6a994e;">
+                                <tr>
+                                    <th class="p-2">증감률 (Rate)</th>
+                                    <th class="p-2">진단 상태</th>
+                                    <th class="p-2">조치</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b" style="background-color: #fce7e7; color: #9c2a2a;">
+                                    <td class="p-2 font-bold">&gt; +15%</td>
+                                    <td class="p-2 font-bold">🚨 심각 (초과공급)</td>
+                                    <td class="p-2 text-xs">긴급 수매</td>
+                                </tr>
+                                <tr class="border-b" style="background-color: #fef3e7; color: #9a4d0f;">
+                                    <td class="p-2 font-bold">+5% ~ +15%</td>
+                                    <td class="p-2 font-bold">⚠️ 경계 (과잉 우려)</td>
+                                    <td class="p-2 text-xs">수매 준비</td>
+                                </tr>
+                                <tr class="border-b" style="background-color: #f0fdf4; color: #155e2f;">
+                                    <td class="p-2 font-bold">-5% ~ +5%</td>
+                                    <td class="p-2 font-bold">✅ 안정</td>
+                                    <td class="p-2 text-xs">모니터링</td>
+                                </tr>
+                                <tr class="border-b" style="background-color: #fefbec; color: #926c0b;">
+                                    <td class="p-2 font-bold">-15% ~ -5%</td>
+                                    <td class="p-2 font-bold">⚠️ 경계 (부족 우려)</td>
+                                    <td class="p-2 text-xs">비축량 검토</td>
+                                </tr>
+                                <tr style="background-color: #fef3e7; color: #9a4d0f;">
+                                    <td class="p-2 font-bold">&lt; -15%</td>
+                                    <td class="p-2 font-bold">🔥 심각 (공급부족)</td>
+                                    <td class="p-2 text-xs">비축량 방출</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 푸터 -->
+        <footer class="text-center mt-8 pt-6 border-t" style="border-color: #a7c957;"> <!-- mt-12 -> mt-8 -->
+            <p class="text-sm text-gray-600">본 인포그래픽은 G-NAPS (경남 마늘 수급 안정화 시스템) 프로젝트 데이터를 기반으로 생성되었습니다.</p>
+        </footer>
+
+    </div>
+
+    <!-- AI Modal Structure -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="document.getElementById('aiModal').style.display='none';">&times;</span>
+            <h2 id="modalTitle" class="text-2xl font-extrabold mb-4" style="color: #6a994e;"></h2>
+            <div id="modalBody" class="text-gray-700 text-base leading-relaxed">
+                <p id="loadingIndicator" class="text-center py-8 text-xl font-bold text-gray-500 hidden">
+                    AI가 보고서를 작성 중입니다... 📝
+                </p>
+                <div id="geminiOutput"></div>
+            </div>
+            <div class="mt-6 border-t pt-3 text-sm text-gray-500">
+                <p>💡 이 기능은 Gemini AI를 활용하여 실시간으로 생성된 내용입니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = ""; // Gemini API Key
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+        
+        // --- Gemini API Call Logic ---
+        async function callGeminiApi(systemPrompt, userQuery, title) {
+            const modal = document.getElementById('aiModal');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const geminiOutput = document.getElementById('geminiOutput');
+            
+            document.getElementById('modalTitle').innerText = title;
+            geminiOutput.innerHTML = '';
+            
+            modal.style.display = 'flex';
+            loadingIndicator.classList.remove('hidden');
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            let response = null;
+            let attempts = 0;
+            const maxAttempts = 3;
+            let delay = 1000;
+
+            while (attempts < maxAttempts) {
+                try {
+                    response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        break;
+                    } else if (response.status === 429) {
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            delay *= 2; // Exponential backoff
+                            continue;
+                        }
+                    }
+                    throw new Error(`API Error: ${response.statusText}`);
+                } catch (error) {
+                    attempts++;
+                    if (attempts >= maxAttempts) {
+                        geminiOutput.innerHTML = `<p class="text-red-600 font-bold">오류 발생: ${error.message}. 잠시 후 다시 시도해 주세요.</p>`;
+                        loadingIndicator.classList.add('hidden');
+                        return;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; // Exponential backoff
+                }
+            }
+            
+            loadingIndicator.classList.add('hidden');
+            
+            if (response && response.ok) {
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "응답을 생성하지 못했습니다.";
+                
+                // Markdown to HTML conversion (simple)
+                const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                          .replace(/\n/g, '<br>');
+                geminiOutput.innerHTML = formattedText;
+            } else {
+                geminiOutput.innerHTML = `<p class="text-red-600 font-bold">응답을 받지 못했습니다. 네트워크 연결을 확인해 주세요.</p>`;
+            }
+        }
+        
+        // --- Event Handlers ---
+
+        document.getElementById('guideButton').addEventListener('click', () => {
+            const system = "당신은 농가를 위한 영농 가이드라인 작성 전문가입니다. 현재의 '경계(과잉 우려)' 진단 상태를 바탕으로, 농가 소득 안정을 위한 파종 및 출하 조절 가이드라인을 구체적인 단계와 함께 3가지 항목으로 요약하여 작성해 주세요.";
+            const query = "현재의 마늘 수급 진단 상태는 '경계(과잉 우려)'이며, 생산량이 9.4% 초과한 상태입니다. 가격 방어를 위한 농가 행동 지침(파종, 출하 조절) 초안을 작성해주세요.";
+            callGeminiApi(system, query, "맞춤형 영농 가이드 초안 (LLM 지원)");
+        });
+
+
+        // --- Chart Initialization (Existing Logic) ---
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+        
+        const chartPluginsConfig = {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    font: {
+                        family: "'Inter', 'Noto Sans KR', sans-serif",
+                        size: 12,
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                titleFont: {
+                    family: "'Inter', 'Noto Sans KR', sans-serif",
+                    size: 12,
+                },
+                bodyFont: {
+                    family: "'Inter', 'Noto Sans KR', sans-serif",
+                    size: 11,
+                }
+            }
+        };
+
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    ['현재 생산량', '(580톤)'],
+                    ['평년 생산량', '(530톤)']
+                ],
+                datasets: [{
+                    data: [580, 530],
+                    backgroundColor: ['#a7c957', '#6a994e'],
+                    borderColor: ['#a7c957', '#6a994e'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPluginsConfig,
+                cutout: '60%'
+            }
+        });
+
+        const confidenceCtx = document.getElementById('confidenceChart').getContext('2d');
+        new Chart(confidenceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['AI 신뢰도 (88%)', ''],
+                datasets: [{
+                    data: [88, 12],
+                    backgroundColor: ['#6a994e', '#e5e5e5'],
+                    borderColor: ['#6a994e', '#e5e5e5'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPluginsConfig,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                         display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const priceCtx = document.getElementById('priceChart').getContext('2d');
+        new Chart(priceCtx, {
+            type: 'line',
+            data: {
+                labels: ['6월', '7월(현재)', '8월(예)', '9월(예)', '10월(예)'],
+                datasets: [
+                    {
+                        label: '평년 가격 (원/kg)',
+                        data: [3500, 3400, 3300, 3400, 3500],
+                        borderColor: '#6a994e',
+                        backgroundColor: '#6a994e20',
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#6a994e',
+                        tension: 0.1,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'AI 예측 가격 (원/kg)',
+                        data: [3500, 3400, 3286, 3402, 3426],
+                        borderColor: '#bc4749',
+                        backgroundColor: '#bc474920',
+                        borderWidth: 4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#bc4749',
+                        tension: 0.1,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) { return value.toLocaleString() + '원'; }
+                        }
+                    }
+                },
+                plugins: chartPluginsConfig
+            }
+        });
+    </script>
+</body>
+</html>
