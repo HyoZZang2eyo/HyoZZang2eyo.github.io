@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택 가격 예측 기반 보험 직무 포트폴리오</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f3f3f3;
+        }
+        .kakao-yellow {
+            background-color: #FEE500;
+            color: #191919;
+        }
+        .kakao-text {
+            color: #3C1E1E;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- 아이콘 컴포넌트 (Inline SVG) ---
+        const IconHome = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        );
+        const IconChartLine = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M3 3v18h18"/>
+                <path d="m19 9-5 5-4-4-3 3"/>
+            </svg>
+        );
+        const IconCalculator = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <rect width="16" height="20" x="4" y="2" rx="2"/>
+                <line x1="8" x2="16" y1="6" y2="6"/>
+                <line x1="16" x2="16" y1="14" y2="18"/>
+                <path d="M16 10h.01"/>
+                <path d="M12 10h.01"/>
+                <path d="M8 10h.01"/>
+                <path d="M12 14h.01"/>
+                <path d="M8 14h.01"/>
+                <path d="M12 18h.01"/>
+                <path d="M8 18h.01"/>
+            </svg>
+        );
+        const IconData = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M12 12c-3.5 0-6-1.5-6-3.5s2.5-3.5 6-3.5 6 1.5 6 3.5-2.5 3.5-6 3.5Z"/>
+                <path d="M12 12v7"/>
+                <path d="M18 19c0 1.5-2.5 3.5-6 3.5S6 20.5 6 19"/>
+                <path d="M6 8.5v7c0 1.5 2.5 3.5 6 3.5s6-2 6-3.5v-7"/>
+            </svg>
+        );
+        const IconShield = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+        );
+        const IconScale = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                <path d="M7 21h10"/>
+                <path d="M12 3v18"/>
+                <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+            </svg>
+        );
+         const IconCheck = ({ size, className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M20 6 9 17l-5-5"/>
+            </svg>
+        );
+
+        const App = () => {
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                setIsVisible(true);
+            }, []);
+
+            return (
+                <div className="max-w-4xl mx-auto bg-white shadow-xl min-h-screen pb-20">
+                    {/* Header */}
+                    <header className="kakao-yellow p-10 text-center relative overflow-hidden">
+                        <div className={`relative z-10 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                            <span className="inline-block bg-white px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider text-gray-800">PORTFOLIO INFOGRAPHIC</span>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-4 kakao-text">위험(Risk)의 크기를 예측하다</h1>
+                            <p className="text-lg md:text-xl font-medium opacity-80 kakao-text">
+                                주택 가격 예측 모델링을 통한<br className="md:hidden"/> 정량적 손실 예측 및 언더라이팅 역량
+                            </p>
+                        </div>
+                        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                            <IconHome className="w-full h-full" />
+                        </div>
+                    </header>
+
+                    {/* Intro Section */}
+                    <section className="p-8 md:p-12">
+                        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+                            <div className="flex-1">
+                                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                                    <IconData className="text-yellow-500" />
+                                    프로젝트 개요 (Valuation Modeling)
+                                </h2>
+                                <p className="text-gray-600 leading-relaxed mb-4">
+                                    Ames Housing 데이터를 활용하여 주택의 다양한 속성(Feature)을 기반으로 <strong>적정 시장 가치(Sale Price)를 예측하는 LightGBM 회귀 모델</strong>을 개발했습니다. 결측치가 많은 불완전한 데이터를 정제하고, RMSE를 평가지표로 삼아 가격 예측 오차를 최소화했습니다.
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                    <span className="px-3 py-1 bg-gray-100 rounded text-sm font-medium text-gray-600">Regression</span>
+                                    <span className="px-3 py-1 bg-gray-100 rounded text-sm font-medium text-gray-600">LightGBM</span>
+                                    <span className="px-3 py-1 bg-gray-100 rounded text-sm font-medium text-gray-600">Missing Data Handling</span>
+                                </div>
+                            </div>
+                            
+                            {/* Key Performance Metrics */}
+                            <div className="flex-1 w-full grid grid-cols-2 gap-4">
+                                <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 text-center shadow-sm">
+                                    <div className="text-red-500 mb-2 flex justify-center"><IconChartLine size={28}/></div>
+                                    <div className="text-2xl font-bold text-gray-800">RMSE 최적화</div>
+                                    <div className="text-xs text-gray-500 font-bold uppercase mt-1">예측 오차 최소화</div>
+                                    <p className="text-[10px] text-gray-400 mt-2">손해율 예측 정확도와 직결</p>
+                                </div>
+                                <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 text-center shadow-sm">
+                                    <div className="text-blue-500 mb-2 flex justify-center"><IconData size={28}/></div>
+                                    <div className="text-2xl font-bold text-gray-800">81 Features</div>
+                                    <div className="text-xs text-gray-500 font-bold uppercase mt-1">변수 중요도 분석</div>
+                                    <p className="text-[10px] text-gray-400 mt-2">위험 요율 인자(Factor) 발굴</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Problem & Solution (성과 중심 스토리텔링) */}
+                    <section className="bg-white px-8 py-4 mb-8">
+                        <h2 className="text-2xl font-bold mb-6 text-center">Data Problem Solving</h2>
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <div className="flex-1 bg-red-50 p-6 rounded-lg border border-red-100">
+                                <span className="bg-red-200 text-red-800 text-xs font-bold px-2 py-1 rounded">PROBLEM</span>
+                                <h3 className="font-bold text-lg mt-2 mb-2">Real-world Data의 불완전성</h3>
+                                <p className="text-sm text-gray-600">
+                                    실제 주택 데이터(Ames)는 다수의 결측치(NaN)와 복잡한 범주형 변수를 포함하고 있어, 단순 모델링 시 예측 성능이 저하되는 문제가 발생함.
+                                </p>
+                            </div>
+                            <div className="hidden md:flex items-center justify-center text-gray-300">
+                                <IconCheck size={24} />
+                            </div>
+                            <div className="flex-1 bg-green-50 p-6 rounded-lg border border-green-100">
+                                <span className="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded">SOLUTION</span>
+                                <h3 className="font-bold text-lg mt-2 mb-2">전처리 전략 비교 및 최적화</h3>
+                                <ul className="text-sm text-gray-600 list-disc pl-4 space-y-1">
+                                    <li><strong>결측치 처리 실험:</strong> 단순 제거(Drop) vs 0 치환(Fillna) 성능 비교 검증 (A/B Testing)</li>
+                                    <li><strong>Feature Engineering:</strong> 범주형 데이터(Zoning, Street 등)의 Label Encoding을 통한 수치화</li>
+                                    <li><strong>Feature Selection:</strong> 중요도가 낮은 변수를 제거하여 과적합 방지 및 모델 효율성 증대</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Core Competency Visualized */}
+                    <section className="bg-gray-50 py-12 px-8">
+                        <h2 className="text-center text-2xl font-bold mb-10">데이터 분석 핵심 결과</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            
+                            {/* Card 1: Feature Importance */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="font-bold text-lg">핵심 가격 결정 요인 (Risk Factors)</h3>
+                                    <IconScale className="text-gray-400" />
+                                </div>
+                                <div className="space-y-3 mb-4">
+                                    {/* Mock Data based on typical Ames housing analysis */}
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span>Overall Quality (전반적 품질)</span>
+                                            <span className="font-bold text-red-600">1위</span>
+                                        </div>
+                                        <div className="w-full bg-gray-100 rounded-full h-2">
+                                            <div className="bg-red-500 h-2 rounded-full" style={{width: '90%'}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span>GrLivArea (지상 거주 면적)</span>
+                                            <span className="font-bold">2위</span>
+                                        </div>
+                                        <div className="w-full bg-gray-100 rounded-full h-2">
+                                            <div className="bg-gray-700 h-2 rounded-full" style={{width: '75%'}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span>Garage Cars (차고 용량)</span>
+                                            <span className="font-bold">3위</span>
+                                        </div>
+                                        <div className="w-full bg-gray-100 rounded-full h-2">
+                                            <div className="bg-gray-400 h-2 rounded-full" style={{width: '50%'}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-gray-600">
+                                    <strong>인사이트:</strong> 주택 가격(Risk)에 영향을 미치는 <strong>Key Factor</strong>를 식별했습니다. 이는 보험 상품 개발 시 요율(Premium)을 차등화하는 <strong>우량체/표준체 분류 기준</strong>을 수립하는 데 적용될 수 있습니다.
+                                </p>
+                            </div>
+
+                            {/* Card 2: RMSE Reduction */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="font-bold text-lg">예측 오차(RMSE) 개선</h3>
+                                    <IconCalculator className="text-gray-400" />
+                                </div>
+                                <div className="h-40 flex items-end justify-around pb-2 border-b border-gray-100">
+                                    <div className="w-1/4 group relative">
+                                        <div className="h-32 bg-gray-200 rounded-t-lg mx-auto w-full"></div>
+                                        <span className="absolute bottom-0 w-full text-center text-xs font-bold mb-1">Baseline</span>
+                                    </div>
+                                    <div className="w-1/4 group relative">
+                                        <div className="h-24 bg-yellow-200 rounded-t-lg mx-auto w-full"></div>
+                                        <span className="absolute bottom-0 w-full text-center text-xs font-bold mb-1">DropNA</span>
+                                    </div>
+                                    <div className="w-1/4 group relative">
+                                        <div className="h-16 bg-kakao-yellow rounded-t-lg mx-auto w-full bg-[#FEE500]"></div>
+                                        <span className="absolute bottom-0 w-full text-center text-xs font-bold mb-1">Optimized</span>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-gray-600 mt-4">
+                                    <strong>성과:</strong> 데이터 전처리 방식 변경(Drop vs Fillna)을 통해 RMSE를 획기적으로 개선했습니다. 이는 <strong>보험 예실차(예상 vs 실제 손해액)를 줄이는 정교한 Pricing 역량</strong>을 증명합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* The Bridge: Connecting to Kakao Insurance */}
+                    <section className="p-8 md:p-12">
+                        <div className="text-center mb-12">
+                            <span className="text-yellow-600 font-bold tracking-widest text-xs uppercase">Why Me?</span>
+                            <h2 className="text-3xl font-bold mt-2">카카오 보험상품개발 직무와의 연결고리</h2>
+                        </div>
+
+                        <div className="space-y-6">
+                            {/* Link 1 */}
+                            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-yellow-50 p-6 rounded-xl border border-yellow-100 transition-transform hover:scale-[1.01]">
+                                <div className="bg-white p-4 rounded-full shadow-sm text-yellow-500 shrink-0">
+                                    <IconShield size={32} />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-gray-800">합리적 보험료 산출 (Fair Pricing)</h3>
+                                    <p className="text-gray-700 text-sm md:text-base">
+                                        주택 가격 예측은 <strong>미래의 불확실한 가치를 숫자로 환산</strong>하는 과정입니다. 이 회귀 분석 역량을 바탕으로 사고 발생 확률과 예상 심도(Severity)를 예측하여, 고객과 회사가 모두 납득할 수 있는 <strong>합리적인 보험료</strong>를 설계하겠습니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Link 2 */}
+                            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-gray-50 p-6 rounded-xl border border-gray-100 transition-transform hover:scale-[1.01]">
+                                <div className="bg-white p-4 rounded-full shadow-sm text-gray-700 shrink-0">
+                                    <IconCheck size={32} />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-gray-800">데이터 기반 언더라이팅 자동화</h3>
+                                    <p className="text-gray-700 text-sm md:text-base">
+                                        수십 개의 변수 중 핵심 요인을 찾아내는 <strong>Feature Importance 분석</strong> 경험은 보험 인수 심사(Underwriting) 자동화의 핵심입니다. 고위험군을 사전에 식별하고, 안전한 고객에게는 혜택을 주는 정교한 인수 기준을 만들겠습니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Link 3 */}
+                            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-white p-6 rounded-xl border border-gray-200 shadow-sm transition-transform hover:scale-[1.01]">
+                                <div className="bg-gray-100 p-4 rounded-full shadow-sm text-gray-600 shrink-0">
+                                    <IconData size={32} />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-gray-800">PropTech + InsureTech 융합</h3>
+                                    <p className="text-gray-700 text-sm md:text-base">
+                                        부동산 자산 관리와 보험은 떼려야 뗄 수 없는 관계입니다. 주택 가격 예측 모델을 통해 <strong>주택 화재 보험이나 담보 대출 연계 상품</strong> 개발 시, 적정 가입 금액을 자동으로 추천해주는 차별화된 서비스를 기획할 수 있습니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Closing / Call to Action */}
+                    <footer className="bg-gray-900 text-white p-12 text-center rounded-b-lg mt-8">
+                        <div className="max-w-2xl mx-auto">
+                            <h2 className="text-2xl font-bold mb-6">"예측 가능한 숫자로, 고객의 불안을 확신으로 바꿉니다"</h2>
+                            <p className="text-gray-400 mb-8">
+                                숫자로 가치를 증명해 본 경험을 바탕으로,<br />
+                                카카오 보험상품개발팀에서 빈틈없는 상품 구조를 설계하겠습니다.
+                            </p>
+                            <div className="inline-flex items-center gap-2 bg-yellow-400 text-black px-6 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors cursor-pointer">
+                                <IconCheck size={20} />
+                                <span>Ready to Join</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+
