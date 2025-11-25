@@ -174,8 +174,8 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 3: 금융거래상품예측 
-             <a href="kakao.html" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
+            <!-- 프로젝트 3: 금융거래상품예측 -->
+            <a href="kakao.html" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
                     <div class="w-full h-full flex items-center justify-center text-slate-300">
@@ -196,7 +196,7 @@
                         <span>#Finance</span>
                     </div>
                 </div>
-            </article>
+            </a>
 
         </div>
     </section>
@@ -221,7 +221,7 @@
     </div>
 </footer>
 
-<!-- 모달 팝업 (프로젝트 3처럼 아직 상세 페이지가 없는 경우를 위한 모달) -->
+<!-- 모달 팝업 (프로젝트 3도 링크로 바뀌었으므로 실제로는 사용되지 않지만, 다른 프로젝트를 위해 남겨둡니다) -->
 <div id="projectModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
     <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
 
@@ -240,40 +240,16 @@
 </div>
 
 <script>
-    // 프로젝트 데이터 (Project 1, 2는 이제 외부 파일로 연결되므로 데이터 삭제됨)
-    const projects = {
-        'project3': {
-            title: 'Time Series Forecast',
-            content: `
-                    <div class="bg-slate-50 p-10 border-b border-slate-100 text-center">
-                        <div class="inline-block px-3 py-1 text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 mb-4">MODELING</div>
-                        <h2 class="text-3xl font-bold serif-font mb-3 text-slate-900">Time Series Forecast</h2>
-                        <p class="text-slate-500">금융 시장 시계열 예측 모델링</p>
-                    </div>
-                    <div class="p-10">
-                        <div class="flex items-center justify-center h-64 bg-slate-100 mb-6 text-slate-400 border border-slate-200">
-                            <i class="fas fa-chart-line text-4xl"></i>
-                        </div>
-                        <p class="text-slate-700 leading-relaxed mb-4">
-                            환율 및 원자재 가격 데이터를 수집하여 ARIMA와 LSTM 모델 성능을 비교 분석했습니다.
-                            변동성이 큰 구간에서는 딥러닝 모델(LSTM)이 더 우수한 예측 성능을 보임을 입증했습니다.
-                        </p>
-                         <p class="text-xs text-red-500 mt-6">⚠️ 이 내용은 현재 모달로 임시 표시되며, 정식 보고서를 만들면 해당 페이지로 연결될 예정입니다.</p>
-                    </div>
-                `
-        }
-    };
-
     function openModal(projectId) {
+        // 프로젝트가 이제 모두 직접 링크로 연결되므로 모달 기능은 사용되지 않습니다.
+        // 추후 다시 모달이 필요할 경우를 위해 함수 구조만 유지합니다.
         const modal = document.getElementById('projectModal');
         const modalBody = document.getElementById('modalBody');
-        const project = projects[projectId];
-
-        if (project) {
-            modalBody.innerHTML = project.content;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        
+        // 여기에 컨텐츠 로드 로직 추가 가능
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
