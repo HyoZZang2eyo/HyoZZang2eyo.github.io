@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney Content Analysis Project</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Noto Sans KR', 'Noto Sans', sans-serif; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        
+        /* 탭 전환 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 selection:bg-indigo-100">
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white py-12 px-4 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10 text-center md:text-left">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 mb-4">Data Analysis Project</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-2">
+                Disney Content Analysis
+            </h1>
+            <p class="text-lg md:text-xl text-indigo-100 font-medium">
+                파이썬 워드클라우드를 활용한 디즈니 영화/TV쇼 키워드 시각화
+            </p>
+        </div>
+        
+        <!-- Abstract Background Shapes -->
+        <div class="absolute -top-10 -right-10 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
+        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- 0. Planning Background -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">0. 기획 배경 (Background)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Why Card -->
+                <div class="bg-gradient-to-br from-white to-yellow-50 rounded-xl shadow-lg p-6 border-t-4 border-yellow-400">
+                    <div class="flex items-center mb-3 text-yellow-700">
+                        <i data-lucide="search" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-bold">Why?</h3>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">비정형 데이터의 가치</h4>
+                    <p class="text-sm text-slate-600">
+                        OTT 플랫폼 성장으로 콘텐츠 데이터가 폭증하고 있습니다. 
+                        수많은 텍스트 데이터(제목) 속에서 <span class="font-bold text-slate-800">핵심 트렌드</span>를 빠르게 파악할 방법이 필요했습니다.
+                    </p>
+                </div>
+
+                <!-- Goal Card -->
+                <div class="bg-gradient-to-br from-white to-purple-50 rounded-xl shadow-lg p-6 border-t-4 border-purple-400">
+                    <div class="flex items-center mb-3 text-purple-700">
+                        <i data-lucide="target" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-bold">Goal</h3>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">브랜드 아이덴티티 시각화</h4>
+                    <p class="text-sm text-slate-600">
+                        단순한 나열(List)이 아닌, 빈도수 분석을 통해 
+                        <span class="font-bold text-slate-800">"디즈니가 가장 사랑하는 단어"</span>가 무엇인지 한눈에 보이는 이미지로 구현하고자 했습니다.
+                    </p>
+                </div>
+
+                <!-- Skill Card -->
+                <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-lg p-6 border-t-4 border-blue-400">
+                    <div class="flex items-center mb-3 text-blue-700">
+                        <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-bold">Skill</h3>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">NLP 기초 & 시각화 역량</h4>
+                    <p class="text-sm text-slate-600">
+                        Python의 Pandas를 활용한 데이터 전처리부터 WordCloud 라이브러리 활용까지,
+                        <span class="font-bold text-slate-800">데이터 분석의 A to Z</span>를 경험해보고자 했습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Project Overview -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">1. 프로젝트 개요 (Overview)</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Data Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border border-indigo-100">
+                    <h3 class="font-bold text-lg mb-3 flex items-center">
+                        <i data-lucide="database" class="w-5 h-5 mr-2 text-indigo-600"></i>
+                        분석 대상 데이터
+                    </h3>
+                    <p class="text-slate-600 mb-4 text-sm">
+                        Disney+ 및 관련 데이터셋에 있는 영화/TV 프로그램의 제목(Title) 데이터 프레임.
+                    </p>
+                    <div class="flex flex-wrap gap-2" id="raw-data-container">
+                        <!-- JS로 데이터 주입됨 -->
+                    </div>
+                </div>
+
+                <!-- Output Card -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border border-pink-100">
+                    <h3 class="font-bold text-lg mb-3 flex items-center">
+                        <i data-lucide="image" class="w-5 h-5 mr-2 text-pink-600"></i>
+                        최종 산출물 (Output)
+                    </h3>
+                    <p class="text-slate-600 text-sm">
+                        디즈니 로고(또는 캐릭터) 실루엣 안에 키워드가 배치된 
+                        <span class="font-bold text-pink-600 mx-1">고해상도 WordCloud</span> 
+                        이미지. (빈도수가 높을수록 텍스트 크기 확대)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Analysis Workflow (Interactive Tabs) -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">2. 분석 방법론 (Methodology)</h2>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden">
+                <!-- Steps Navigation -->
+                <div class="flex overflow-x-auto md:grid md:grid-cols-3 border-b border-slate-100" id="tab-buttons">
+                    <!-- Buttons will be generated by JS or maintained here -->
+                    <button onclick="switchTab(0)" class="tab-btn flex items-center justify-center p-4 min-w-[160px] transition-all bg-indigo-50 text-indigo-700 border-b-2 border-indigo-600" id="btn-0">
+                        <i data-lucide="database" class="w-5 h-5 mr-2"></i>
+                        <span class="font-bold text-sm">1. 데이터 전처리</span>
+                    </button>
+                    <button onclick="switchTab(1)" class="tab-btn flex items-center justify-center p-4 min-w-[160px] transition-all text-slate-500 hover:bg-slate-50" id="btn-1">
+                        <i data-lucide="layers" class="w-5 h-5 mr-2"></i>
+                        <span class="font-bold text-sm">2. 마스킹 & 설정</span>
+                    </button>
+                    <button onclick="switchTab(2)" class="tab-btn flex items-center justify-center p-4 min-w-[160px] transition-all text-slate-500 hover:bg-slate-50" id="btn-2">
+                        <i data-lucide="code" class="w-5 h-5 mr-2"></i>
+                        <span class="font-bold text-sm">3. 워드클라우드 생성</span>
+                    </button>
+                </div>
+
+                <!-- Step Content Container -->
+                <div class="p-8 min-h-[300px] flex flex-col md:flex-row gap-8 items-start">
+                    <!-- Content Area -->
+                    <div class="flex-1" id="tab-content">
+                        <!-- Content injected by JS -->
+                    </div>
+
+                    <!-- Visual Guide Area -->
+                    <div class="w-full md:w-1/3 bg-slate-50 rounded-xl p-6 flex items-center justify-center border border-dashed border-slate-300 min-h-[200px]" id="visual-guide">
+                        <!-- Visual injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Final Simulation Result -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i data-lucide="mouse-pointer" class="w-5 h-5"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">3. 최종 결과 및 인사이트 (Result)</h2>
+            </div>
+
+            <div class="bg-slate-900 rounded-xl shadow-lg p-6 border-4 border-slate-800 relative overflow-hidden min-h-[400px] flex items-center justify-center">
+                <!-- Background Gradient -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#0E0F37] via-[#1a2b4a] to-[#335B92] opacity-90"></div>
+                
+                <!-- Word Cloud Simulation -->
+                <div class="relative z-10 flex flex-wrap justify-center items-center max-w-2xl gap-4 p-8" id="wordcloud-container">
+                    <!-- Words injected by JS -->
+                </div>
+
+                <!-- Decoration: Mask Outline Simulation -->
+                <div class="absolute inset-0 border-[20px] border-slate-900 rounded-[3rem] opacity-20 pointer-events-none"></div>
+                
+                <div class="absolute bottom-4 right-4 bg-black/50 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+                    Generated by Python WordCloud
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100 text-center">
+                    <h4 class="font-bold text-slate-700">Top Keyword</h4>
+                    <p class="text-2xl font-extrabold text-indigo-600 mt-1">Frozen</p>
+                    <p class="text-xs text-slate-400">데이터 기반 핵심 키워드</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100 text-center">
+                    <h4 class="font-bold text-slate-700">Total Titles</h4>
+                    <p class="text-2xl font-extrabold text-pink-600 mt-1" id="total-count">0</p>
+                    <p class="text-xs text-slate-400">분석된 총 제목 수</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100 text-center">
+                    <h4 class="font-bold text-slate-700">Analysis Type</h4>
+                    <p class="text-2xl font-extrabold text-blue-600 mt-1">NLP</p>
+                    <p class="text-xs text-slate-400">텍스트 빈도수 시각화</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate-400 py-12 border-t border-slate-200 mt-12">
+            <p class="text-sm mb-2">Based on Python Final Project Code</p>
+            <div class="flex justify-center items-center space-x-2 text-xs">
+                <i data-lucide="code" class="w-3 h-3"></i>
+                <span>matplotlib</span>
+                <span>&bull;</span>
+                <span>wordcloud</span>
+                <span>&bull;</span>
+                <span>pandas</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Data Definitions
+        const RAW_DATA = [
+            "Frozen", "The Lion King", "Toy Story", "Aladdin", "Cinderella",
+            "Beauty and the Beast", "Mulan", "Pocahontas", "The Little Mermaid"
+        ];
+
+        const WORD_CLOUD_DATA = [
+            { text: "Frozen", size: "text-5xl", color: "text-blue-500", weight: 9, rotate: -5 },
+            { text: "Lion King", size: "text-4xl", color: "text-yellow-600", weight: 8, rotate: 5 },
+            { text: "Aladdin", size: "text-4xl", color: "text-purple-600", weight: 7, rotate: 0 },
+            { text: "Beauty", size: "text-3xl", color: "text-pink-500", weight: 6, rotate: -5 },
+            { text: "Toy Story", size: "text-3xl", color: "text-green-600", weight: 6, rotate: 5 },
+            { text: "Mulan", size: "text-2xl", color: "text-red-500", weight: 5, rotate: 0 },
+            { text: "Cinderella", size: "text-2xl", color: "text-blue-400", weight: 5, rotate: -5 },
+            { text: "Pocahontas", size: "text-xl", color: "text-amber-700", weight: 4, rotate: 5 },
+            { text: "Mermaid", size: "text-xl", color: "text-teal-500", weight: 4, rotate: 0 },
+            { text: "The", size: "text-sm", color: "text-gray-400", weight: 2, rotate: -5 },
+            { text: "and", size: "text-sm", color: "text-gray-400", weight: 1, rotate: 5 },
+        ];
+
+        const STEPS_DATA = [
+            {
+                id: 'data',
+                title: '1. 데이터 전처리 (Pre-processing)',
+                desc: '분석할 영화 제목 데이터를 리스트로 정의하고 텍스트로 변환합니다.',
+                badge: 'STEP 1',
+                contentHTML: `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 font-mono text-sm">
+                        <p class="text-slate-500 mb-2"># 데이터프레임 생성 및 텍스트 변환</p>
+                        <div class="text-blue-600">data = {</div>
+                        <div class="pl-4 text-green-700">
+                            'title': [<br/>
+                            &nbsp;&nbsp;"Frozen", "The Lion King", ...<br/>
+                            ]
+                        </div>
+                        <div class="text-blue-600">}</div>
+                        <div class="mt-2 text-slate-800">
+                            text = <span class="text-amber-600">' '</span>.join(df['title'].tolist())
+                        </div>
+                    </div>
+                `,
+                visualHTML: `
+                    <div class="text-center fade-in">
+                        <i data-lucide="file-text" class="w-16 h-16 text-slate-300 mx-auto mb-2 inline-block"></i>
+                        <p class="text-xs text-slate-400 font-mono">raw_data.txt</p>
+                    </div>
+                `
+            },
+            {
+                id: 'mask',
+                title: '2. 마스킹 & 시각화 설정 (Config)',
+                desc: '디즈니 로고(disney.jpg)를 마스크로 로드하고, 브랜드 컬러맵을 설정합니다.',
+                badge: 'STEP 2',
+                contentHTML: `
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-4 bg-slate-50 p-3 rounded-lg">
+                            <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center text-white text-xs text-center opacity-80">
+                                Mask<br/>Image
+                            </div>
+                            <div class="flex-1 font-mono text-sm">
+                                <p class="text-slate-500"># 이미지 로드 (Numpy Array)</p>
+                                <p>mask = np.array(Image.open('disney.jpg'))</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 bg-gradient-to-r from-[#0E0F37] to-[#335B92] p-3 rounded-lg text-white">
+                            <i data-lucide="palette" class="w-6 h-6"></i>
+                            <div class="flex-1 font-mono text-sm">
+                                <p class="opacity-80"># 브랜드 컬러맵 (Deep Blue)</p>
+                                <p>['#0E0F37', '#335B92']</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                visualHTML: `
+                    <div class="relative fade-in">
+                        <div class="w-24 h-24 bg-black rounded-full opacity-10 blur-sm absolute top-2 left-2"></div>
+                        <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center text-white text-xs relative z-10">
+                            Mask Shape
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'render',
+                title: '3. 워드클라우드 생성 (Generating)',
+                desc: 'WordCloud 라이브러리를 통해 최종 이미지를 생성하고 출력합니다.',
+                badge: 'STEP 3',
+                contentHTML: `
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-xs md:text-sm shadow-inner">
+                        <span class="text-purple-400">wc</span> = WordCloud(<br/>
+                        &nbsp;&nbsp;font_path=<span class="text-green-400">'NanumSquareB'</span>,<br/>
+                        &nbsp;&nbsp;mask=<span class="text-yellow-400">mask</span>,<br/>
+                        &nbsp;&nbsp;colormap=<span class="text-blue-400">cmap</span>,<br/>
+                        &nbsp;&nbsp;background_color=<span class="text-green-400">'white'</span><br/>
+                        ).generate(text)<br/><br/>
+                        plt.imshow(<span class="text-purple-400">wc</span>)<br/>
+                        plt.axis(<span class="text-green-400">'off'</span>)<br/>
+                        plt.show()
+                    </div>
+                `,
+                visualHTML: `
+                    <div class="animate-pulse fade-in">
+                        <div class="flex flex-wrap gap-1 justify-center max-w-[150px] opacity-50">
+                            <div class="h-2 w-8 bg-indigo-400 rounded"></div>
+                            <div class="h-2 w-12 bg-pink-400 rounded"></div>
+                            <div class="h-2 w-6 bg-blue-400 rounded"></div>
+                            <div class="h-2 w-10 bg-indigo-400 rounded"></div>
+                            <div class="h-2 w-5 bg-pink-400 rounded"></div>
+                        </div>
+                        <p class="text-center text-xs text-indigo-600 font-bold mt-2">Generating...</p>
+                    </div>
+                `
+            }
+        ];
+
+        // 2. Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRawData();
+            renderWordCloud();
+            switchTab(0); // Initial tab
+            lucide.createIcons(); // Load icons
+            document.getElementById('total-count').innerText = RAW_DATA.length;
+        });
+
+        // 3. Render Functions
+        function renderRawData() {
+            const container = document.getElementById('raw-data-container');
+            const previewData = RAW_DATA.slice(0, 5);
+            let html = '';
+            
+            previewData.forEach(title => {
+                html += `<span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded border border-slate-200">${title}</span>`;
+            });
+            html += `<span class="text-xs text-slate-400 py-1">...</span>`;
+            
+            container.innerHTML = html;
+        }
+
+        function renderWordCloud() {
+            const container = document.getElementById('wordcloud-container');
+            let html = '';
+            
+            WORD_CLOUD_DATA.forEach(word => {
+                html += `
+                <span class="${word.size} ${word.color} font-black transform hover:scale-110 transition-transform cursor-pointer drop-shadow-lg"
+                      style="font-family: 'Noto Sans', sans-serif; transform: rotate(${word.rotate}deg);"
+                      title="빈도수 가중치: ${word.weight}">
+                    ${word.text}
+                </span>`;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // 4. Tab Switching Logic
+        function switchTab(index) {
+            // Update Buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach((btn, idx) => {
+                const icon = btn.querySelector('i'); // Get icon inside button
+                if (idx === index) {
+                    btn.className = "tab-btn flex items-center justify-center p-4 min-w-[160px] transition-all bg-indigo-50 text-indigo-700 border-b-2 border-indigo-600";
+                    // Icon color handled by parent class in CSS usually, but here we can force it if needed or rely on parent text color
+                } else {
+                    btn.className = "tab-btn flex items-center justify-center p-4 min-w-[160px] transition-all text-slate-500 hover:bg-slate-50";
+                }
+            });
+
+            // Update Content
+            const step = STEPS_DATA[index];
+            const contentDiv = document.getElementById('tab-content');
+            const visualDiv = document.getElementById('visual-guide');
+
+            contentDiv.innerHTML = `
+                <div class="fade-in">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">${step.badge}</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">${step.title}</h3>
+                    <p class="text-slate-600 mb-6">${step.desc}</p>
+                    ${step.contentHTML}
+                </div>
+            `;
+
+            visualDiv.innerHTML = step.visualHTML;
+
+            // Re-render icons for newly injected HTML
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
