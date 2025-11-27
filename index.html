@@ -15,15 +15,6 @@
 
         .scroll-hidden::-webkit-scrollbar { display: none; }
 
-        /* 깔끔한 하드 쉐도우 (단정한 느낌) */
-        .hard-shadow {
-            box-shadow: 4px 4px 0px 0px #1e3a8a; /* Dark Blue Shadow */
-        }
-        .hard-shadow-hover:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px 0px #1e3a8a;
-        }
-
         /* 흐르는 텍스트 (뉴스 티커 스타일) */
         .marquee-container {
             overflow: hidden;
@@ -83,7 +74,7 @@
         </h1>
         <p class="text-lg text-slate-600 max-w-xl mx-auto mb-10 font-light">
             데이터 너머의 리스크를 읽고, 숫자로 가치를 증명합니다.<br>
-            <strong>상품 개발, 계리, 리스크 관리</strong>를 위한 분석 기록입니다.
+            <strong>리스크 관리 및 금융 데이터 분석</strong>을 위한 기록입니다.
         </p>
 
         <div class="flex justify-center gap-4">
@@ -107,7 +98,53 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- 프로젝트 1: 금융상품 추천 (Kakao_Insurance_Portfolio.html) -->
+            <!-- [NEW] 프로젝트 1: 가계부채 스트레스 테스트 (debt.html) -->
+            <a href="debt.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
+                <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
+                    <!-- Icon -->
+                    <i class="fas fa-chart-area text-6xl text-slate-500 opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Household Debt Stress Test <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
+                        <span class="px-2 py-1 text-xs font-bold bg-slate-200 text-slate-800 border border-slate-300">Risk Management</span>
+                    </div>
+                    <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
+                        금리 급등 및 자산 가치 하락 시나리오 기반 가계 부채 부실 위험 시뮬레이션 및 시스템 리스크 분석.
+                    </p>
+                    <div class="flex gap-2 text-xs font-medium text-slate-400">
+                        <span>#R_Studio</span>
+                        <span>#Stress_Test</span>
+                        <span>#Scenario_Analysis</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- [NEW] 프로젝트 2: 디즈니 콘텐츠 분석 (disney.html) -->
+            <a href="disney.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
+                <div class="h-64 bg-indigo-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
+                    <!-- Icon -->
+                    <i class="fas fa-magic text-6xl text-indigo-500 opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Disney Content Analysis <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
+                        <span class="px-2 py-1 text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">NLP / Text Mining</span>
+                    </div>
+                    <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
+                        Python WordCloud를 활용한 디즈니 영화/TV쇼 키워드 시각화. 텍스트 마이닝을 통한 브랜드 아이덴티티 도출.
+                    </p>
+                    <div class="flex gap-2 text-xs font-medium text-slate-400">
+                        <span>#Python</span>
+                        <span>#NLP</span>
+                        <span>#Visualization</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 기존 프로젝트: 금융상품 추천 -->
             <a href="kakao.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-yellow-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -129,7 +166,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 2: 주택 가격 예측 (Kakao_Insurance_Portfolio_Housing.html) -->
+            <!-- 기존 프로젝트: 주택 가격 예측 -->
             <a href="housing.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-blue-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -151,7 +188,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 3: 마케팅 반응 예측 (Kakao_Insurance_Portfolio_Marketing.html) -->
+            <!-- 기존 프로젝트: 마케팅 반응 예측 -->
             <a href="marketing.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-green-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -173,7 +210,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 4: 이상 거래 탐지 FDS (Kakao_Insurance_Portfolio_FDS.html) -->
+            <!-- 기존 프로젝트: FDS -->
             <a href="fds.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-red-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -195,7 +232,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 5: 장단기 금리 분석 (Kakao_Insurance_Portfolio_Macro.html) -->
+            <!-- 기존 프로젝트: 매크로 분석 -->
             <a href="macro.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-indigo-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -207,7 +244,7 @@
                         <span class="px-2 py-1 text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">Asset Management / ALM</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                        1980~2024 미국 장단기 금리 시계열 분석(Cointegration & ECM). 금리 변동에 따른 자산-부채 관리(ALM) 전략 및 K-ICS 대응 시나리오 수립 역량 증명.
+                        1980~2024 미국 장단기 금리 시계열 분석(Cointegration & ECM). 금리 변동에 따른 자산-부채 관리(ALM) 전략 및 K-ICS 대응 시나리오 수립.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
                         <span>#Time_Series</span>
@@ -218,7 +255,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 6: Global Safe Care (global-safe-care-report.html) -->
+            <!-- 기존 프로젝트: Global Safe Care -->
             <a href="global-safe-care-report.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -240,7 +277,7 @@
                 </div>
             </a>
 
-            <!-- 프로젝트 7: Smart Farm Data (smart-farm-report.html) -->
+            <!-- 기존 프로젝트: Smart Farm (가로로 긴 카드) -->
             <a href="smart-farm-report.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block md:col-span-2">
                 <div class="h-64 bg-teal-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -252,7 +289,7 @@
                         <span class="px-2 py-1 text-xs font-bold bg-teal-100 text-teal-800 border border-teal-200">Data Analysis</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                        농협중앙회 면접 시연용 포트폴리오입니다. api 누르지 마세용 (농가소득증대를 위한 농산물 가격 예측). 데이터 기반 의사결정 지원을 위한 시각화 및 분석.
+                        농가소득증대를 위한 농산물 가격 예측. 데이터 기반 의사결정 지원을 위한 시각화 및 분석.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
                         <span>#R</span>
@@ -271,8 +308,6 @@
     <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-6 serif-font">Contact</h2>
         <p class="text-slate-400 mb-8 text-sm">
-            데이터로 가치를 증명하는 김효진입니다.<br>
-            언제든 연락주세요.
         </p>
 
         <a href="mailto:example@email.com" class="inline-block bg-white text-slate-900 px-8 py-3 text-sm font-bold hover:bg-blue-50 transition">
