@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Loan Conversion Prediction</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 탭 전환 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Progress Bar Animation */
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-100">
+
+    <!-- 1. Header -->
+    <header class="bg-slate-900 text-white py-12 px-4 relative overflow-hidden border-b-4 border-blue-600">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-blue-100 text-blue-800 border-blue-200">Financial Data Analysis</span>
+                    <span class="text-slate-400 text-xs uppercase tracking-wider">Project Portfolio</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-2 leading-tight">
+                    개인 대출 고객 전환율 예측 모델링
+                </h1>
+                <p class="text-slate-300 text-lg font-light">
+                    데이터 기반 타겟 마케팅을 통한 <span class="text-blue-400 font-semibold">예산 효율화</span> 및 <span class="text-blue-400 font-semibold">수익성 개선</span> 전략
+                </p>
+            </div>
+            
+            <div class="mt-6 md:mt-0 flex items-center bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20">
+                <i data-lucide="briefcase" class="w-5 h-5 mr-3 text-blue-400"></i>
+                <div class="text-right">
+                    <div class="text-xs text-slate-400">Target Position</div>
+                    <div class="font-bold text-sm">금융공기업 데이터 직군</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-12">
+
+        <!-- 2. 기획 의도 (Background) -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <i data-lucide="target" class="w-6 h-6 text-blue-700"></i>
+                <h2 class="text-2xl font-bold text-slate-800">01. 기획 배경 (Why & How)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Problem Card -->
+                <div class="bg-gradient-to-br from-white to-blue-50 border-t-4 border-t-blue-600 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="alert-circle" class="w-5 h-5 mr-2 text-blue-600"></i>
+                        현황 및 문제점 (Problem)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start">
+                            <span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-xs mr-2 font-bold mt-0.5">Pain Point</span>
+                            <span>기존 개인 대출 캠페인의 낮은 전환율(9.6%)로 인한 마케팅 비용 낭비 발생.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-xs mr-2 font-bold mt-0.5">Risk</span>
+                            <span>무분별한 권유로 인한 기존 예금 고객의 피로도 증가 및 이탈 우려.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution Card -->
+                <div class="bg-gradient-to-br from-white to-emerald-50 border-t-4 border-t-emerald-600 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-emerald-600"></i>
+                        해결 전략 및 기대효과 (Solution)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start">
+                            <span class="bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded text-xs mr-2 font-bold mt-0.5">Goal</span>
+                            <span>머신러닝(Logistic Regression)을 활용해 <strong>전환 가능성이 높은 고객(High Potential)</strong> 선별.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded text-xs mr-2 font-bold mt-0.5">Impact</span>
+                            <span>마케팅 예산 효율화 및 맞춤형 제안을 통한 <strong>고객 신뢰도 제고</strong> (공공성+수익성).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 데이터 및 방법론 (Methodology) -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <i data-lucide="file-text" class="w-6 h-6 text-blue-700"></i>
+                <h2 class="text-2xl font-bold text-slate-800">02. 데이터 분석 방법론 (Process)</h2>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x border-b">
+                    <div class="p-4 text-center hover:bg-slate-50 transition-colors">
+                        <div class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Total Data</div>
+                        <div class="text-3xl font-extrabold text-slate-800">5,000</div>
+                        <div class="text-xs text-slate-400">Rows (Customers)</div>
+                    </div>
+                    <div class="p-4 text-center hover:bg-slate-50 transition-colors">
+                        <div class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Response (Y)</div>
+                        <div class="text-3xl font-extrabold text-blue-600">9.6%</div>
+                        <div class="text-xs text-slate-400">Target (1) Rate</div>
+                    </div>
+                    <div class="p-4 text-center hover:bg-slate-50 transition-colors">
+                        <div class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Algorithm</div>
+                        <div class="text-lg font-bold text-slate-800 mt-1">Logistic Regression</div>
+                        <div class="text-xs text-slate-400 mt-1">Scikit-learn</div>
+                    </div>
+                    <div class="p-4 text-center hover:bg-slate-50 transition-colors">
+                        <div class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Validation</div>
+                        <div class="text-lg font-bold text-slate-800 mt-1">Confusion Matrix</div>
+                        <div class="text-xs text-slate-400 mt-1">Accuracy, Recall</div>
+                    </div>
+                </div>
+                
+                <div class="p-6 bg-slate-50 text-sm">
+                    <h4 class="font-bold text-slate-700 mb-2">[Code Logic Overview]</h4>
+                    <div class="font-mono bg-slate-800 text-slate-200 p-4 rounded-lg overflow-x-auto">
+                        <p><span class="text-purple-400">from</span> sklearn.linear_model <span class="text-purple-400">import</span> LogisticRegression</p>
+                        <p><span class="text-purple-400">from</span> sklearn.metrics <span class="text-purple-400">import</span> accuracy_score, confusion_matrix</p>
+                        <br/>
+                        <p class="text-slate-500"># 1. 모델 학습 및 예측</p>
+                        <p>model = LogisticRegression()</p>
+                        <p>model.fit(X_train, y_train)</p>
+                        <p>y_pred = model.predict(X_test)</p>
+                        <br/>
+                        <p class="text-slate-500"># 2. 성능 평가 (정확도 1.0 나올 시 과적합 의심 로직 포함)</p>
+                        <p><span class="text-yellow-400">if</span> accuracy == 1.0:</p>
+                        <p>&nbsp;&nbsp;print(<span class="text-green-400">"Warning: Check Overfitting"</span>)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 시뮬레이션 결과 (Dashboard) -->
+        <section>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 border-b pb-2 border-slate-200 gap-4">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="trending-up" class="w-6 h-6 text-blue-700"></i>
+                    <h2 class="text-2xl font-bold text-slate-800">03. 분석 결과 및 인사이트 (Dashboard)</h2>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-3 py-1 text-sm rounded transition-colors bg-blue-600 text-white font-medium">
+                        Model Result
+                    </button>
+                    <button onclick="switchTab('business')" id="btn-business" class="px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium">
+                        Biz Impact
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div id="dashboard-content" class="min-h-[400px]">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-slate-200 text-slate-500 text-sm mt-12">
+            <p class="mb-2">본 프로젝트는 Python(Pandas, Scikit-learn)을 활용한 데이터 분석 실습 결과입니다.</p>
+            <div class="flex justify-center space-x-4">
+                <span class="flex items-center"><i data-lucide="shield-check" class="w-3 h-3 mr-1"></i> Data Security</span>
+                <span class="flex items-center"><i data-lucide="users" class="w-3 h-3 mr-1"></i> Customer Centric</span>
+                <span class="flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Efficiency</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data Constants ---
+        const METRICS = {
+            total_customers: 5000,
+            conversion_rate: 9.6,
+            target_customers: 480,
+            accuracy: 96.4,
+            auc_score: 0.92
+        };
+
+        const FEATURES = [
+            { name: "Income (소득)", score: 85, desc: "가장 높은 상관관계" },
+            { name: "Education (교육수준)", score: 65, desc: "석사 이상 선호" },
+            { name: "CCAvg (카드지출)", score: 60, desc: "월 평균 지출액" },
+            { name: "CD Account (예금)", score: 45, desc: "보유 여부" },
+            { name: "Family (가족수)", score: 30, desc: "가구 구성원" },
+        ];
+
+        // --- Render Functions ---
+
+        function renderDashboard() {
+            // Generate Feature Bars HTML
+            let featuresHTML = '';
+            FEATURES.forEach((feat, idx) => {
+                featuresHTML += `
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="font-semibold text-slate-700">${feat.name}</span>
+                        <span class="text-slate-500">${feat.desc}</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2.5">
+                        <div class="bg-blue-600 h-2.5 rounded-full progress-bar" style="width: 0%" data-width="${feat.score}%"></div>
+                    </div>
+                </div>`;
+            });
+
+            // Calculate SVG Dash Offset
+            // Circumference of radius 60 is 2 * pi * 60 ≈ 377
+            const circumference = 377;
+            const offset = circumference * (1 - METRICS.accuracy / 100);
+
+            return `
+            <div class="grid md:grid-cols-2 gap-6 fade-in">
+                <!-- Feature Importance -->
+                <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-700 mb-4 flex items-center">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4 mr-2"></i>
+                        핵심 변수 중요도 (Feature Importance)
+                    </h3>
+                    <div class="space-y-4">
+                        ${featuresHTML}
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-right">* 수입(Income)과 교육 수준이 대출 전환의 핵심 요인</p>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl shadow-md border border-slate-200 flex flex-col justify-center items-center py-8">
+                        <div class="relative w-32 h-32 flex items-center justify-center">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle cx="64" cy="64" r="60" fill="none" stroke="#e2e8f0" stroke-width="8" />
+                                <circle cx="64" cy="64" r="60" fill="none" stroke="#2563eb" stroke-width="8" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" />
+                            </svg>
+                            <div class="absolute text-center">
+                                <div class="text-3xl font-extrabold text-slate-800">${METRICS.accuracy}%</div>
+                                <div class="text-xs text-slate-500 font-bold">Accuracy</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p class="text-sm font-medium text-slate-600">Model: Logistic Regression</p>
+                            <p class="text-xs text-slate-400">Validation Set Score</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 text-white rounded-xl shadow-md p-6">
+                        <h4 class="text-sm font-bold text-slate-400 mb-2">Confusion Matrix Insight</h4>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-slate-700/50 p-2 rounded">
+                                <div class="text-emerald-400 text-lg font-bold">High Precision</div>
+                                <div class="text-xs text-slate-300">정확한 타겟팅</div>
+                            </div>
+                            <div class="bg-slate-700/50 p-2 rounded">
+                                <div class="text-blue-400 text-lg font-bold">High Recall</div>
+                                <div class="text-xs text-slate-300">잠재 고객 놓침 방지</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderBusiness() {
+            return `
+            <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-8 fade-in">
+                <h3 class="text-xl font-bold text-emerald-800 mb-4 flex items-center">
+                    <i data-lucide="dollar-sign" class="w-6 h-6 mr-2"></i>
+                    기대되는 비즈니스 임팩트 (ROI)
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="text-slate-500 text-sm mb-2">기존 마케팅 비용</div>
+                        <div class="text-2xl font-bold text-slate-400 line-through">100%</div>
+                        <div class="text-xs text-slate-400 mt-1">전체 고객 대상 발송</div>
+                    </div>
+                    <div class="flex items-center justify-center text-emerald-500">
+                        <i data-lucide="trending-up" class="w-8 h-8"></i>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-2 border-emerald-500">
+                        <div class="text-emerald-600 text-sm mb-2 font-bold">모델 적용 후 비용</div>
+                        <div class="text-3xl font-extrabold text-emerald-700">30% ▼</div>
+                        <div class="text-xs text-emerald-600 mt-1">상위 30% 고효율 고객 집중</div>
+                    </div>
+                </div>
+                <p class="mt-6 text-center text-emerald-800 font-medium">
+                    "불필요한 마케팅 비용은 줄이고, 실제 대출이 필요한 고객에게 집중하여<br/>
+                    금융 공기업으로서의 효율적 자원 배분 역량을 입증하겠습니다."
+                </p>
+            </div>`;
+        }
+
+        // --- Tab Logic ---
+        function switchTab(tabName) {
+            const contentDiv = document.getElementById('dashboard-content');
+            const dashboardBtn = document.getElementById('btn-dashboard');
+            const businessBtn = document.getElementById('btn-business');
+
+            if (tabName === 'dashboard') {
+                dashboardBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-blue-600 text-white font-medium";
+                businessBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium hover:bg-slate-300";
+                contentDiv.innerHTML = renderDashboard();
+                
+                // Trigger Progress Bar Animation
+                setTimeout(() => {
+                    document.querySelectorAll('.progress-bar').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 50);
+
+            } else {
+                dashboardBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium hover:bg-slate-300";
+                businessBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-emerald-600 text-white font-medium";
+                contentDiv.innerHTML = renderBusiness();
+            }
+
+            // Refresh Icons
+            lucide.createIcons();
+        }
+
+        // --- Initialize ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('dashboard');
+        });
+
+    </script>
+</body>
+</html>

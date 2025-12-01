@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Asset Risk Management</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 탭 전환 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-100">
+
+    <!-- 1. Header -->
+    <header class="bg-slate-900 text-white py-12 px-4 relative overflow-hidden border-b-4 border-blue-600">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-slate-100 text-slate-800 border-slate-200">Risk Management</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-blue-50 text-blue-700 border-blue-100">Robo-Advisor</span>
+                </div>
+                <h1 class="text-3xl md:text-3xl font-extrabold mb-2 leading-tight">
+                    AI 기반 고객 맞춤형 자산 리스크 관리 시스템
+                </h1>
+                <p class="text-slate-300 text-lg font-light">
+                    불완전 판매 방지 및 <span class="text-blue-400 font-semibold">생애주기별 최적 자산 배분(Asset Allocation)</span> 솔루션
+                </p>
+            </div>
+            
+            <div class="mt-6 md:mt-0 flex items-center bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20">
+                <i data-lucide="shield-alert" class="w-5 h-5 mr-3 text-blue-400"></i>
+                <div class="text-right">
+                    <div class="text-xs text-slate-400">Core Objective</div>
+                    <div class="font-bold text-sm">재무 건전성 강화</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-12">
+
+        <!-- 2. 기획 의도 (Background) -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <i data-lucide="briefcase" class="w-6 h-6 text-blue-800"></i>
+                <h2 class="text-2xl font-bold text-slate-800">01. 기획 배경 (Asset & Risk)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Risk Factors -->
+                <div class="bg-gradient-to-br from-white to-red-50 border-t-4 border-t-red-500 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 mr-2 text-red-600"></i>
+                        리스크 요인 (Risk Factors)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span><strong>금융 문맹 및 쏠림 투자:</strong> 자신의 리스크 감내 능력(Risk Tolerance)을 고려하지 않은 고위험 자산 투자로 가계 부실 위험 증가.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span><strong>불완전 판매 우려:</strong> 고객의 재무 상황과 무관한 상품 권유로 인한 민원 발생 및 공공 신뢰도 하락.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution -->
+                <div class="bg-gradient-to-br from-white to-blue-50 border-t-4 border-t-blue-500 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-600"></i>
+                        자산 관리 솔루션 (Solution)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span><strong>데이터 기반 리스크 프로파일링:</strong> 고객 행동 데이터와 소득/부채 정보를 머신러닝으로 분석해 객관적인 <strong>투자 성향 등급</strong> 산출.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span><strong>건전한 포트폴리오 제안:</strong> 단순히 '수익률 높은 상품'이 아닌, 고객의 생애주기에 맞춰 <strong>리스크를 헷지(Hedge)</strong>할 수 있는 자산 배분안 제시.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 데이터 및 방법론 (Methodology) -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <i data-lucide="database" class="w-6 h-6 text-blue-800"></i>
+                <h2 class="text-2xl font-bold text-slate-800">02. 리스크 분석 모델링 (Modeling)</h2>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x border-b">
+                    <!-- Step 1 -->
+                    <div class="p-6">
+                        <div class="text-xs text-slate-400 font-bold uppercase mb-2">Input Data</div>
+                        <h3 class="font-bold text-slate-800 text-lg mb-3">Financial Profile</h3>
+                        <div class="text-sm text-slate-600 space-y-2">
+                            <p>• <strong>Demographics:</strong> 연령, 가구 구성</p>
+                            <p>• <strong>Financials:</strong> 소득 구간, 부채 비율(DSR)</p>
+                            <p>• <strong>Behavior:</strong> 투자 상품 클릭 이력, 리스크 선호도</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="p-6 bg-blue-50/30">
+                        <div class="text-xs text-blue-400 font-bold uppercase mb-2">Core Algorithm</div>
+                        <h3 class="font-bold text-blue-800 text-lg mb-3">Risk Classification</h3>
+                        <div class="text-sm text-slate-600 space-y-2">
+                            <p>• <strong>Decision Tree / XGBoost:</strong> 고객의 부실 가능성 및 리스크 성향 분류.</p>
+                            <p>• <strong>Collaborative Filtering:</strong> 유사한 재무 건전성을 가진 Peer Group의 안정적 포트폴리오 참조.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-6">
+                        <div class="text-xs text-slate-400 font-bold uppercase mb-2">Output</div>
+                        <h3 class="font-bold text-slate-800 text-lg mb-3">Asset Allocation</h3>
+                        <div class="text-sm text-slate-600 space-y-2">
+                            <p>• <strong>Risk Score:</strong> 1~5등급 산출</p>
+                            <p>• <strong>Portfolio:</strong> 주식/채권/현금 비중 제안</p>
+                            <p>• <strong>Monitoring:</strong> 주기적 리밸런싱 알림</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-slate-900 text-xs font-mono text-slate-300">
+                    &gt; model = RiskClassifier(random_state=42)<br/>
+                    &gt; risk_score = model.predict_proba(user_financial_data)[:, 1]<br/>
+                    &gt; recommended_portfolio = optimize_allocation(risk_score)
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 시뮬레이션 결과 (Dashboard) -->
+        <section>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 border-b pb-2 border-slate-200 gap-4">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="activity" class="w-6 h-6 text-blue-800"></i>
+                    <h2 class="text-2xl font-bold text-slate-800">03. 자산 관리 시뮬레이션 (Dashboard)</h2>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="switchTab('risk_profile')" id="btn-risk_profile" class="px-3 py-1 text-sm rounded transition-colors bg-blue-600 text-white font-medium">
+                        Risk Analysis
+                    </button>
+                    <button onclick="switchTab('portfolio')" id="btn-portfolio" class="px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium">
+                        Portfolio
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Container -->
+            <div id="dashboard-content" class="min-h-[400px]">
+                <!-- Dynamic Content will be injected here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-slate-200 text-slate-500 text-sm mt-12">
+            <p class="mb-2">Python(Sklearn) 기반의 금융 리스크 분석 및 자산 배분 모델링 프로젝트</p>
+            <div class="flex justify-center space-x-4">
+                <span class="flex items-center"><i data-lucide="shield" class="w-3 h-3 mr-1"></i> Risk Control</span>
+                <span class="flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Stable Growth</span>
+                <span class="flex items-center"><i data-lucide="target" class="w-3 h-3 mr-1"></i> Custom Fit</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data ---
+        const PORTFOLIO_SUGGESTIONS = [
+            { rank: 1, name: "국채/우량채권 혼합형 펀드", risk_level: "Low", logic: "고객의 안전지향 성향(변동성 회피) 반영", allocation: "40%" },
+            { rank: 2, name: "인덱스 ETF (S&P 500)", risk_level: "Medium", logic: "장기 자산 증식을 위한 시장 수익률 추종", allocation: "30%" },
+            { rank: 3, name: "현금성 자산 (CMA)", risk_level: "Very Low", logic: "긴급 유동성 확보를 위한 버퍼(Buffer) 마련", allocation: "30%" },
+        ];
+
+        const RISK_FACTORS = [
+            { feature: "Income Stability (소득 안정성)", imp: 0.35, desc: "고정 수입 여부" },
+            { feature: "Debt Ratio (부채 비율)", imp: 0.25, desc: "DSR 수준 분석" },
+            { feature: "Age (생애 주기)", imp: 0.20, desc: "은퇴 남은 기간" },
+            { feature: "Past Default (연체 이력)", imp: 0.15, desc: "신용 리스크" },
+            { feature: "Invest Exp (투자 경험)", imp: 0.05, desc: "금융 이해도" },
+        ];
+
+        // --- Helper Functions ---
+        function getBadgeColorClass(color) {
+            const colors = {
+                navy: "bg-slate-100 text-slate-800 border-slate-200",
+                red: "bg-red-50 text-red-700 border-red-100",
+                green: "bg-emerald-50 text-emerald-700 border-emerald-100",
+                blue: "bg-blue-50 text-blue-700 border-blue-100"
+            };
+            return colors[color] || colors.navy;
+        }
+
+        // --- Render Functions ---
+        
+        function renderRiskProfile() {
+            let featuresHTML = '';
+            RISK_FACTORS.forEach((feat, idx) => {
+                const barColor = idx < 2 ? 'bg-red-500' : 'bg-blue-500';
+                featuresHTML += `
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="font-semibold text-slate-700">${feat.feature}</span>
+                        <span class="text-slate-500">${(feat.imp * 100).toFixed(0)}% Impact</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="h-2 rounded-full ${barColor}" style="width: ${feat.imp * 100}%"></div>
+                    </div>
+                    <div class="text-[10px] text-slate-400 mt-1">${feat.desc}</div>
+                </div>`;
+            });
+
+            return `
+            <div class="grid md:grid-cols-2 gap-6 fade-in">
+                <!-- Feature Importance Chart -->
+                <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-700 mb-4 flex items-center">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4 mr-2"></i>
+                        리스크 결정 주요 요인 (Feature Importance)
+                    </h3>
+                    <div class="space-y-4">
+                        ${featuresHTML}
+                    </div>
+                </div>
+
+                <!-- User Risk Profile -->
+                <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6 flex flex-col items-center justify-center text-center">
+                    <div class="mb-4 relative">
+                        <div class="w-32 h-32 rounded-full border-8 border-slate-100 flex items-center justify-center">
+                            <span class="text-3xl font-extrabold text-blue-800">78</span>
+                        </div>
+                        <div class="absolute top-0 left-0 w-32 h-32 rounded-full border-8 border-blue-600 border-t-transparent border-l-transparent transform rotate-45"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">안정 추구형 (Stable)</h3>
+                    <p class="text-sm text-slate-500 mt-2 px-4">
+                        "소득은 안정적이나 부채 상환 부담이 있어, <br/>
+                        원금 손실 가능성을 최소화해야 하는 단계입니다."
+                    </p>
+                    <div class="mt-4 flex space-x-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border ${getBadgeColorClass('green')}">부채 관리 필요</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border ${getBadgeColorClass('blue')}">중위험 중수익</span>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderPortfolio() {
+            let suggestionsHTML = '';
+            PORTFOLIO_SUGGESTIONS.forEach((item) => {
+                const badgeColor = (item.risk_level === 'Low' || item.risk_level === 'Very Low') ? 'green' : 'blue';
+                suggestionsHTML += `
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="font-bold text-slate-800">${item.name}</div>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border ${getBadgeColorClass(badgeColor)}">
+                            ${item.risk_level} Risk
+                        </span>
+                    </div>
+                    <div class="text-xs text-slate-500 mb-2">${item.logic}</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div class="bg-slate-400 h-1.5 rounded-full" style="width: ${item.allocation}"></div>
+                    </div>
+                    <div class="text-right text-[10px] text-slate-400 mt-1">비중 ${item.allocation}</div>
+                </div>`;
+            });
+
+            return `
+            <div class="grid md:grid-cols-2 gap-6 fade-in">
+                <!-- Portfolio Allocation Pie Chart Sim -->
+                <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6 flex flex-col justify-center items-center">
+                    <h3 class="font-bold text-slate-700 mb-6 flex items-center w-full">
+                        <i data-lucide="pie-chart" class="w-4 h-4 mr-2"></i>
+                        최적 자산 배분 제안 (Asset Allocation)
+                    </h3>
+                    <div class="relative w-48 h-48 rounded-full bg-blue-50 border-4 border-white shadow-inner flex items-center justify-center overflow-hidden">
+                        <!-- CSS Conic Gradient for Pie Chart -->
+                        <div class="absolute inset-0" style="background: conic-gradient(#3b82f6 0% 40%, #10b981 40% 70%, #f59e0b 70% 100%)"></div>
+                        <div class="absolute inset-4 bg-white rounded-full flex flex-col items-center justify-center z-10">
+                            <span class="text-xs text-slate-400">Total Asset</span>
+                            <span class="font-bold text-lg">Portfolio</span>
+                        </div>
+                    </div>
+                    <div class="flex mt-6 space-x-4 text-xs">
+                        <div class="flex items-center"><div class="w-3 h-3 bg-blue-500 rounded-full mr-1"></div> 채권(40%)</div>
+                        <div class="flex items-center"><div class="w-3 h-3 bg-emerald-500 rounded-full mr-1"></div> 주식(30%)</div>
+                        <div class="flex items-center"><div class="w-3 h-3 bg-amber-500 rounded-full mr-1"></div> 현금(30%)</div>
+                    </div>
+                </div>
+
+                <!-- Recommendation List -->
+                <div class="bg-slate-50 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-800 mb-4 flex items-center">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-emerald-600"></i>
+                        포트폴리오 구성 상품 (Recommendations)
+                    </h3>
+                    <div class="space-y-3">
+                        ${suggestionsHTML}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // --- Tab Logic ---
+        function switchTab(tabName) {
+            const contentDiv = document.getElementById('dashboard-content');
+            
+            // Update Buttons
+            const riskBtn = document.getElementById('btn-risk_profile');
+            const portBtn = document.getElementById('btn-portfolio');
+
+            if (tabName === 'risk_profile') {
+                riskBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-blue-600 text-white font-medium";
+                portBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium hover:bg-slate-300";
+                contentDiv.innerHTML = renderRiskProfile();
+            } else {
+                riskBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium hover:bg-slate-300";
+                portBtn.className = "px-3 py-1 text-sm rounded transition-colors bg-emerald-600 text-white font-medium";
+                contentDiv.innerHTML = renderPortfolio();
+            }
+
+            // Refresh Icons
+            lucide.createIcons();
+        }
+
+        // --- Initialize ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('risk_profile');
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+</html>

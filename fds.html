@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI FDS System</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 탭 전환 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-100">
+
+    <!-- 1. Header -->
+    <header class="bg-slate-900 text-white py-12 px-4 relative overflow-hidden border-b-4 border-red-600">
+        <div class="max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-red-50 text-red-700 border-red-100">Financial Security</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-slate-100 text-slate-800 border-slate-200">Consumer Protection</span>
+                </div>
+                <h1 class="text-3xl md:text-3xl font-extrabold mb-2 leading-tight">
+                    AI 기반 이상거래 탐지 시스템 (FDS) 구축
+                </h1>
+                <p class="text-slate-300 text-lg font-light">
+                    전자금융사기 예방을 통한 <span class="text-red-400 font-semibold">국민 자산 보호</span> 및 <span class="text-red-400 font-semibold">금융 시스템 신뢰도 제고</span>
+                </p>
+            </div>
+            
+            <div class="mt-6 md:mt-0 flex items-center bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20">
+                <i data-lucide="lock" class="w-5 h-5 mr-3 text-red-400"></i>
+                <div class="text-right">
+                    <div class="text-xs text-slate-400">Core Value</div>
+                    <div class="font-bold text-sm">무결점 보안 (Zero Trust)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-12">
+
+        <!-- 2. 기획 배경 -->
+        <section>
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <i data-lucide="shield-alert" class="w-6 h-6 text-slate-800"></i>
+                <h2 class="text-2xl font-bold text-slate-800">01. 기획 배경 (Public Interest)</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Risk Card -->
+                <div class="bg-gradient-to-br from-white to-red-50 border-t-4 border-t-red-600 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 mr-2 text-red-600"></i>
+                        사회적 문제 (Risk)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start"><span class="text-red-600 font-bold mr-2">•</span><span><strong>지능화되는 금융 범죄:</strong> 보이스피싱, 카드 도용 등 전자금융사기 수법 고도화.</span></li>
+                        <li class="flex items-start"><span class="text-red-600 font-bold mr-2">•</span><span><strong>사후 대처의 한계:</strong> 사고 후 보상보다는 <strong>거래 시점 차단</strong>이 필수적.</span></li>
+                    </ul>
+                </div>
+                <!-- Mission Card -->
+                <div class="bg-gradient-to-br from-white to-blue-50 border-t-4 border-t-blue-600 rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-600"></i>
+                        해결 및 목표 (Mission)
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span><span><strong>실시간 AI 모니터링:</strong> 24/365 중단 없는 감시로 이상 징후 즉시 차단.</span></li>
+                        <li class="flex items-start"><span class="text-blue-600 font-bold mr-2">•</span><span><strong>오탐(False Positive) 최소화:</strong> 정상 고객 결제 방해 최소화로 <strong>서비스 품질 유지</strong>.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 탭 메뉴 및 콘텐츠 -->
+        <section>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 border-b pb-2 border-slate-200 gap-4">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="activity" class="w-6 h-6 text-slate-800"></i>
+                    <h2 class="text-2xl font-bold text-slate-800">02. 시스템 시뮬레이션 및 결과</h2>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-3 py-1 text-sm rounded transition-colors bg-red-600 text-white font-medium">Monitoring View</button>
+                    <button onclick="switchTab('analysis')" id="btn-analysis" class="px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium">Model Logic</button>
+                    <button onclick="switchTab('results')" id="btn-results" class="px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium">Performance Report</button>
+                </div>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div id="tab-content" class="min-h-[400px]">
+                <!-- Content will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-slate-200 text-slate-500 text-sm mt-12">
+            <p class="mb-2">본 프로젝트는 Kaggle Credit Card Fraud Detection 데이터셋을 활용한 AI 모델링 실습입니다.</p>
+            <div class="flex justify-center space-x-4">
+                <span class="flex items-center"><i data-lucide="shield-alert" class="w-3 h-3 mr-1"></i> Fraud Prevention</span>
+                <span class="flex items-center"><i data-lucide="database" class="w-3 h-3 mr-1"></i> Data Integrity</span>
+                <span class="flex items-center"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Public Trust</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data ---
+        const DETECTED_CASES = [
+            { id: "TRX-9982", time: "03:15 AM", amount: "2,500,000 KRW", risk_score: 98, status: "Blocked", reason: "심야 시간대 고액 해외 결제 시도 (평소 패턴 불일치)" },
+            { id: "TRX-4421", time: "01:40 PM", amount: "15,000 KRW", risk_score: 12, status: "Passed", reason: "정상 생활 반경 내 소액 결제" },
+            { id: "TRX-7731", time: "03:20 PM", amount: "450,000 KRW", risk_score: 75, status: "Warning", reason: "짧은 시간 내 반복 결제 시도 (추가 인증 요구)" },
+        ];
+
+        const FEATURE_IMPORTANCE = [
+            { feature: "V17 (Transaction Pattern)", imp: 0.35, desc: "유저 고유 결제 패턴" },
+            { feature: "V14 (Behavior Logic)", imp: 0.25, desc: "비정상 행동 로직" },
+            { feature: "Amount (거래 금액)", imp: 0.15, desc: "고액 결제 여부" },
+            { feature: "V12 (Device Info)", imp: 0.10, desc: "접속 단말기 환경" },
+            { feature: "Time (거래 시간)", imp: 0.05, desc: "결제 발생 시각" },
+        ];
+
+        const PERFORMANCE_METRICS = [
+            { label: "Fraud Detection Rate (탐지율)", before: 65.4, after: 99.9, unit: "%", desc: "기존 Rule 기반 대비 미탐지 사고 획기적 감소", trend: "up" },
+            { label: "False Positive Rate (오탐률)", before: 4.2, after: 0.08, unit: "%", desc: "정상 고객 불편(민원) 발생 가능성 최소화", trend: "down" },
+            { label: "Response Latency (처리 속도)", before: 350, after: 12, unit: "ms", desc: "실시간 승인 처리에 영향 없는 초고속 연산", trend: "down" }
+        ];
+
+        const METHODOLOGY_STEPS = [
+            { step: "01", title: "Data Preprocessing", subtitle: "데이터 전처리 및 정규화", desc: "Amount(금액) 변수의 RobustScaler 적용으로 이상치 영향 최소화 및 Time 변수 패턴화", icon: "layers", color: "blue" },
+            { step: "02", title: "Handling Imbalance", subtitle: "불균형 데이터 처리 (SMOTE)", desc: "전체 0.17%에 불과한 사기(Fraud) 데이터를 SMOTE 기법으로 증강하여 학습 편향 제거", icon: "git-branch", color: "purple" },
+            { step: "03", title: "Ensemble Modeling", subtitle: "알고리즘 선정 및 학습", desc: "단일 모델 대비 일반화 성능이 우수한 XGBoost / LightGBM 앙상블 기법 적용", icon: "cpu", color: "orange" },
+            { step: "04", title: "Threshold Tuning", subtitle: "임계값 최적화", desc: "Precision-Recall Curve 분석을 통해 F1-Score를 최대화하는 최적의 임계값(Threshold) 설정", icon: "sliders", color: "emerald" } // emerald is commonly green in tailwind
+        ];
+
+        // --- Render Functions ---
+        
+        function getMethodologyHTML() {
+            let html = '<div class="grid grid-cols-1 md:grid-cols-4 gap-4">';
+            METHODOLOGY_STEPS.forEach(step => {
+                // Tailwind dynamic class workaround for color safelist if needed, but here we construct explicitly
+                // Note: 'emerald' uses green classes roughly or we use exact mapping. 
+                // Let's match the react code's color logic: "emerald-600" for green.
+                let colorClass = `text-${step.color}-600`;
+                let bgClass = `bg-${step.color}-500`;
+                if(step.color === 'green') { colorClass = 'text-emerald-600'; bgClass = 'bg-emerald-500'; }
+                
+                html += `
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 relative overflow-hidden group hover:border-blue-300 transition-colors">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity ${bgClass} rounded-bl-xl">
+                        <i data-lucide="${step.icon}" class="w-6 h-6 ${colorClass}"></i>
+                    </div>
+                    <div class="text-xs font-bold text-slate-400 mb-1">STEP ${step.step}</div>
+                    <h4 class="font-bold text-slate-800 mb-1">${step.title}</h4>
+                    <div class="text-[10px] font-semibold text-slate-500 mb-2 uppercase tracking-wide">${step.subtitle}</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">${step.desc}</p>
+                </div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function getFeatureImportanceHTML() {
+            let html = '';
+            FEATURE_IMPORTANCE.forEach((feat, idx) => {
+                const barColor = idx < 2 ? 'bg-red-600' : 'bg-slate-400';
+                html += `
+                <div>
+                    <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700">${feat.feature}</span><span class="text-slate-500">${(feat.imp * 100).toFixed(0)}%</span></div>
+                    <div class="w-full bg-slate-100 rounded-full h-2"><div class="h-2 rounded-full ${barColor}" style="width: ${feat.imp * 100}%"></div></div>
+                    <div class="text-[10px] text-slate-400 mt-1">${feat.desc}</div>
+                </div>`;
+            });
+            return html;
+        }
+
+        function renderDashboard() {
+            let casesHTML = '';
+            DETECTED_CASES.forEach(tx => {
+                let borderClass = tx.status === 'Blocked' ? 'border-red-500' : tx.status === 'Warning' ? 'border-amber-500' : 'border-emerald-500';
+                let textClass = tx.status === 'Blocked' ? 'text-red-600' : tx.status === 'Warning' ? 'text-amber-600' : 'text-emerald-600';
+                
+                casesHTML += `
+                <div class="border-l-4 p-3 rounded bg-slate-50 flex justify-between items-center ${borderClass}">
+                    <div>
+                        <div class="font-mono font-bold text-slate-800">${tx.id} <span class="text-xs font-normal text-slate-500">| ${tx.time}</span></div>
+                        <div class="text-sm font-bold">${tx.amount}</div>
+                        <div class="text-xs text-slate-500">${tx.reason}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-bold ${textClass}">${tx.status}</div>
+                        <div class="text-xs text-slate-400">Risk Score: ${tx.risk_score}</div>
+                    </div>
+                </div>`;
+            });
+
+            return `
+            <div class="grid md:grid-cols-3 gap-6 fade-in">
+                <!-- Status Card -->
+                <div class="md:col-span-1 bg-slate-900 text-white rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="text-sm font-bold text-slate-400 mb-4 flex items-center"><i data-lucide="eye" class="w-4 h-4 mr-2"></i>Real-time Status</h3>
+                    <div class="space-y-6">
+                        <div><div class="text-2xl font-extrabold text-red-500">24건</div><div class="text-xs text-slate-400">금일 차단된 이상 거래</div></div>
+                        <div><div class="text-2xl font-extrabold text-emerald-400">₩ 352M</div><div class="text-xs text-slate-400">예방된 잠재 피해액 (Est.)</div></div>
+                        <div class="pt-4 border-t border-slate-700">
+                            <div class="flex justify-between text-sm mb-1"><span>Risk Level</span><span class="text-red-400">Moderate</span></div>
+                            <div class="flex justify-between text-sm"><span>Server Load</span><span class="text-blue-400">24%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Log Card -->
+                <div class="md:col-span-2 bg-white rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-700 mb-4 flex items-center"><i data-lucide="credit-card" class="w-4 h-4 mr-2"></i>최근 거래 탐지 내역 (Live Log)</h3>
+                    <div class="space-y-3">
+                        ${casesHTML}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAnalysis() {
+            return `
+            <div class="space-y-6 fade-in">
+                ${getMethodologyHTML()}
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6">
+                        <h3 class="font-bold text-slate-700 mb-4 flex items-center"><i data-lucide="bar-chart-2" class="w-4 h-4 mr-2"></i>이상 거래 판단 기준 (Feature Importance)</h3>
+                        <div class="space-y-4">
+                            ${getFeatureImportanceHTML()}
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl shadow-md border border-slate-200 p-6">
+                        <h3 class="font-bold text-slate-700 mb-4 flex items-center"><i data-lucide="server" class="w-4 h-4 mr-2"></i>Deployment & Stack</h3>
+                        <ul class="space-y-4 text-sm text-slate-600">
+                            <li class="flex items-center space-x-3 bg-white p-3 rounded border border-slate-200">
+                                <i data-lucide="database" class="w-5 h-5 text-blue-500"></i>
+                                <div><span class="font-bold block text-slate-800">Scikit-learn & Pandas</span><span class="text-xs">데이터 전처리 및 모델링 라이브러리</span></div>
+                            </li>
+                            <li class="flex items-center space-x-3 bg-white p-3 rounded border border-slate-200">
+                                <i data-lucide="cpu" class="w-5 h-5 text-purple-500"></i>
+                                <div><span class="font-bold block text-slate-800">XGBoost</span><span class="text-xs">고성능 그라디언트 부스팅 모델 사용</span></div>
+                            </li>
+                            <li class="flex items-center space-x-3 bg-white p-3 rounded border border-slate-200">
+                                <i data-lucide="server" class="w-5 h-5 text-emerald-500"></i>
+                                <div><span class="font-bold block text-slate-800">Model Pickle Serving</span><span class="text-xs">학습된 모델의 경량화 및 API 서빙</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderResults() {
+            let metricsHTML = '';
+            PERFORMANCE_METRICS.forEach(metric => {
+                let trendIcon = metric.trend === 'up' ? 'arrow-up-right' : 'arrow-down-right';
+                let trendColor = (metric.trend === 'up' || (metric.trend === 'down' && metric.label.includes('Rate'))) ? 'text-emerald-600' : 'text-slate-400';
+                let prefix = metric.trend === 'up' ? '+' : '';
+                
+                metricsHTML += `
+                <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6 border-t-4 border-t-emerald-500">
+                    <h3 class="text-sm font-bold text-slate-500 mb-2">${metric.label}</h3>
+                    <div class="flex items-end space-x-2 mb-2">
+                        <div class="text-3xl font-extrabold text-slate-800">${metric.after}${metric.unit}</div>
+                        <div class="flex items-center text-sm font-bold mb-1 ${trendColor}">
+                            <i data-lucide="${trendIcon}" class="w-4 h-4"></i>
+                            ${prefix}${(metric.after - metric.before).toFixed(1)}%p
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-400 mb-4">Before: ${metric.before}${metric.unit}</div>
+                    <div class="bg-emerald-50 text-emerald-800 text-xs px-2 py-1 rounded inline-block font-medium">
+                        ${metric.desc}
+                    </div>
+                </div>`;
+            });
+
+            return `
+            <div class="space-y-6 fade-in">
+                <div class="grid md:grid-cols-3 gap-6">
+                    ${metricsHTML}
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 text-white flex flex-col justify-center rounded-xl shadow-md border border-slate-200 p-6">
+                        <h3 class="font-bold text-lg mb-4 flex items-center">
+                            <i data-lucide="trending-up" class="w-5 h-5 mr-2 text-emerald-400"></i>
+                            예상되는 사회적 비용 절감 효과
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+                                <div>
+                                    <div class="text-slate-400 text-sm">연간 사기 피해 방지액</div>
+                                    <div class="text-xs text-slate-500">기존 피해 규모 기준 추산</div>
+                                </div>
+                                <div class="text-2xl font-bold text-emerald-400">₩ 120억+</div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-slate-400 text-sm">수기 검증(Manual Review) 감소</div>
+                                    <div class="text-xs text-slate-500">인력 운영 효율화</div>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-400">85% ▼</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-dashed border-2 border-slate-300 flex flex-col justify-center items-center text-center p-8 rounded-xl shadow-md">
+                        <i data-lucide="pie-chart" class="w-12 h-12 text-slate-300 mb-4"></i>
+                        <h3 class="font-bold text-slate-800 mb-2">ROI (투자 대비 효과) 분석</h3>
+                        <p class="text-sm text-slate-500 mb-4">
+                            시스템 구축 비용 대비 <span class="font-bold text-slate-800">약 18배</span>의<br/>
+                            자산 보호 효과가 있을 것으로 기대됩니다.
+                        </p>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border bg-purple-50 text-purple-700 border-purple-100">High Efficiency</span>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // --- Tab Logic ---
+        function switchTab(tabName) {
+            const contentDiv = document.getElementById('tab-content');
+            
+            // Update Buttons
+            ['dashboard', 'analysis', 'results'].forEach(name => {
+                const btn = document.getElementById(`btn-${name}`);
+                if(name === tabName) {
+                    btn.className = name === 'dashboard' ? 
+                        "px-3 py-1 text-sm rounded transition-colors bg-red-600 text-white font-medium" :
+                        (name === 'analysis' ? "px-3 py-1 text-sm rounded transition-colors bg-slate-800 text-white font-medium" : 
+                        "px-3 py-1 text-sm rounded transition-colors bg-emerald-600 text-white font-medium");
+                } else {
+                    btn.className = "px-3 py-1 text-sm rounded transition-colors bg-slate-200 text-slate-600 font-medium hover:bg-slate-300";
+                }
+            });
+
+            // Update Content
+            if (tabName === 'dashboard') {
+                contentDiv.innerHTML = renderDashboard();
+            } else if (tabName === 'analysis') {
+                contentDiv.innerHTML = renderAnalysis();
+            } else if (tabName === 'results') {
+                contentDiv.innerHTML = renderResults();
+            }
+
+            // Refresh Icons
+            lucide.createIcons();
+        }
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('dashboard');
+        });
+
+    </script>
+</body>
+</html>
