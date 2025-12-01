@@ -38,7 +38,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900 selection:bg-blue-900 selection:text-white relative">
 
-<!-- 상단 뉴스 티커 (금융권 감성) -->
 <div class="bg-slate-900 text-white py-2 border-b border-slate-800 overflow-hidden">
     <div class="marquee-container font-mono text-xs tracking-wider">
         <div class="marquee-content">
@@ -47,7 +46,6 @@
     </div>
 </div>
 
-<!-- 네비게이션 -->
 <nav class="sticky top-0 bg-white/95 backdrop-blur z-50 border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between items-center h-16">
@@ -62,7 +60,6 @@
     </div>
 </nav>
 
-<!-- 히어로 섹션 -->
 <header class="min-h-[60vh] flex flex-col justify-center items-center px-4 bg-white border-b border-slate-200">
     <div class="max-w-4xl w-full text-center">
         <div class="inline-block border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-500 mb-6 tracking-widest uppercase">
@@ -87,7 +84,6 @@
 
 <main class="max-w-6xl mx-auto px-4 pb-20">
 
-    <!-- Projects 섹션 -->
     <section id="projects" class="py-20">
         <div class="flex justify-between items-end mb-12">
             <div>
@@ -98,11 +94,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- [NEW] 프로젝트 1: 가계부채 스트레스 테스트 (debt.html) -->
             <a href="debt.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
-                    <!-- Icon -->
                     <i class="fas fa-chart-area text-6xl text-slate-500 opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
                 </div>
                 <div class="p-6">
@@ -121,11 +115,9 @@
                 </div>
             </a>
 
-            <!-- [NEW] 프로젝트 2: 디즈니 콘텐츠 분석 (disney.html) -->
             <a href="disney.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-indigo-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
-                    <!-- Icon -->
                     <i class="fas fa-magic text-6xl text-indigo-500 opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
                 </div>
                 <div class="p-6">
@@ -144,7 +136,6 @@
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: 금융상품 추천 -->
             <a href="kakao.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-yellow-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -152,21 +143,20 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Personalized Recommendation <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
-                        <span class="px-2 py-1 text-xs font-bold bg-yellow-100 text-yellow-800 border border-yellow-200">Product Dev</span>
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Asset Risk Management <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
+                        <span class="px-2 py-1 text-xs font-bold bg-yellow-100 text-yellow-800 border border-yellow-200">Robo-Advisor</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
-                        사용자 행동 데이터 기반의 협업 필터링 및 LightGBM 하이브리드 모델링. 초개인화 보험 상품 기획을 위한 추천 알고리즘 구현.
+                        고객의 생애주기(Life-Cycle)와 재무 상태를 분석하여 최적의 자산 배분 포트폴리오를 제안하는 리스크 관리 시스템. 불완전 판매 방지를 목표로 합니다.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
-                        <span>#Collaborative_Filtering</span>
-                        <span>#LightGBM</span>
-                        <span>#Hyper-Personalization</span>
+                        <span>#Risk_Profiling</span>
+                        <span>#Asset_Allocation</span>
+                        <span>#Sklearn</span>
                     </div>
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: 주택 가격 예측 -->
             <a href="housing.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-blue-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -174,21 +164,20 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Valuation & Pricing <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
-                        <span class="px-2 py-1 text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">Actuarial</span>
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Real Estate AVM <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
+                        <span class="px-2 py-1 text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">PropTech</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
-                        주택 가격(Risk) 예측을 통한 정량적 가치 평가 모델링. 결측치 처리 및 Feature Engineering을 통한 RMSE 최적화로 보험료 산출 논리 수립.
+                        공공 데이터를 활용한 AI 담보 가치 산정(AVM) 모델. 깡통전세 등 시장 리스크를 탐지하고 객관적 시세를 산출하여 여신 건전성을 확보합니다.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
-                        <span>#Regression</span>
-                        <span>#Pricing</span>
-                        <span>#Risk_Assessment</span>
+                        <span>#XGBoost</span>
+                        <span>#AVM</span>
+                        <span>#Public_Data</span>
                     </div>
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: 마케팅 반응 예측 -->
             <a href="marketing.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-green-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -196,21 +185,20 @@
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Customer Conversion <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
+                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Loan Conversion Prediction <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
                         <span class="px-2 py-1 text-xs font-bold bg-green-100 text-green-800 border border-green-200">Marketing</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
-                        불균형 데이터 처리를 통한 잠재 고객(Lead) 스코어링 및 크로스 셀링 전략 수립. ROC-AUC 최적화로 타겟 마케팅 효율 제고.
+                        Logistic Regression 기반 개인 대출 전환율 예측. 잠재 고객(High Potential) 타겟팅을 통해 마케팅 예산을 효율화하고 수익성을 개선했습니다.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
-                        <span>#Classification</span>
-                        <span>#Imbalanced_Data</span>
-                        <span>#Cross-Selling</span>
+                        <span>#Logistic_Regression</span>
+                        <span>#Target_Marketing</span>
+                        <span>#ROI_Analysis</span>
                     </div>
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: FDS -->
             <a href="fds.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-red-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -219,20 +207,19 @@
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Fraud Detection System <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
-                        <span class="px-2 py-1 text-xs font-bold bg-red-100 text-red-800 border border-red-200">Claim / SIU</span>
+                        <span class="px-2 py-1 text-xs font-bold bg-red-100 text-red-800 border border-red-200">Security / FDS</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
-                        0.17% 초희귀 사기 거래 탐지를 위한 이상징후 분석 시스템 구축. 보험금 부당 청구 방지 및 손해율 관리를 위한 핵심 모델링.
+                        SMOTE로 불균형 데이터를 해결하고 XGBoost 앙상블을 적용한 실시간 이상거래 탐지 시스템. 오탐률(False Positive)을 0.08%로 최소화했습니다.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
+                        <span>#Ensemble_Model</span>
+                        <span>#SMOTE</span>
                         <span>#Anomaly_Detection</span>
-                        <span>#FDS</span>
-                        <span>#Loss_Control</span>
                     </div>
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: 매크로 분석 -->
             <a href="macro.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
                 <div class="h-64 bg-indigo-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -241,7 +228,7 @@
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-3">
                         <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Macro-Economic Analysis <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
-                        <span class="px-2 py-1 text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">Asset Management / ALM</span>
+                        <span class="px-2 py-1 text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">ALM Strategy</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm leading-relaxed">
                         1980~2024 미국 장단기 금리 시계열 분석(Cointegration & ECM). 금리 변동에 따른 자산-부채 관리(ALM) 전략 및 K-ICS 대응 시나리오 수립.
@@ -250,34 +237,10 @@
                         <span>#Time_Series</span>
                         <span>#Econometrics</span>
                         <span>#ALM</span>
-                        <span>#STATA</span>
                     </div>
                 </div>
             </a>
 
-            <!-- 기존 프로젝트: Global Safe Care -->
-            <a href="global-safe-care-report.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block">
-                <div class="h-64 bg-slate-100 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
-                    <i class="fas fa-globe text-6xl text-slate-400 opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-bold serif-font group-hover:text-blue-900 transition text-slate-900">Global Safe Care <i class="fas fa-arrow-right text-xs ml-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></i></h3>
-                        <span class="px-2 py-1 text-xs font-bold bg-slate-100 text-slate-600 border border-slate-200">InsurTech</span>
-                    </div>
-                    <p class="text-slate-600 mb-4 text-sm line-clamp-2 leading-relaxed">
-                        K-셀러를 위한 글로벌 안심 반품/배송 보험 플랫폼. 임베디드 보험 UX와 AI 심사 자동화 프로세스를 구현하여 리스크를 절감했습니다.
-                    </p>
-                    <div class="flex gap-2 text-xs font-medium text-slate-400">
-                        <span>#Python</span>
-                        <span>#React</span>
-                        <span>#Risk_Management</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- 기존 프로젝트: Smart Farm (가로로 긴 카드) -->
             <a href="smart-farm-report.html" target="_blank" class="group bg-white border border-slate-200 hover:border-blue-900 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md block md:col-span-2">
                 <div class="h-64 bg-teal-50 border-b border-slate-200 relative overflow-hidden flex items-center justify-center">
                     <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors z-10"></div>
@@ -289,10 +252,10 @@
                         <span class="px-2 py-1 text-xs font-bold bg-teal-100 text-teal-800 border border-teal-200">Data Analysis</span>
                     </div>
                     <p class="text-slate-600 mb-4 text-sm leading-relaxed">
-                        농가소득증대를 위한 농산물 가격 예측. 데이터 기반 의사결정 지원을 위한 시각화 및 분석.
+                        농가 센서 데이터(온습도, CO2)와 생산량의 상관관계를 분석하여 최적 생육 환경을 도출했습니다. R 상관분석 및 Tableau 대시보드 시각화.
                     </p>
                     <div class="flex gap-2 text-xs font-medium text-slate-400">
-                        <span>#R</span>
+                        <span>#R_Language</span>
                         <span>#Tableau</span>
                         <span>#EDA</span>
                     </div>
@@ -303,11 +266,12 @@
     </section>
 </main>
 
-<!-- 푸터 -->
 <footer id="contact" class="bg-slate-900 text-white py-16 border-t border-slate-800">
     <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-6 serif-font">Contact</h2>
         <p class="text-slate-400 mb-8 text-sm">
+            데이터로 가치를 증명하는 김효진입니다.<br>
+            언제든 연락주세요.
         </p>
 
         <a href="mailto:example@email.com" class="inline-block bg-white text-slate-900 px-8 py-3 text-sm font-bold hover:bg-blue-50 transition">
